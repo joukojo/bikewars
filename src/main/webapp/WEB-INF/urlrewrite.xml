@@ -27,7 +27,7 @@
 	</rule>
 	<rule match-type="wildcard">
 
-		<from>**</from>
+		<from>/**.htm</from>
 		<to>/app/$1</to>
 	</rule>
 	
