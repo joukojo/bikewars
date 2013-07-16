@@ -13,6 +13,7 @@
 		<spring-version>3.2.3.RELEASE</spring-version>
 		<urlrewritefilter-version>4.0.4</urlrewritefilter-version>
 		<slf4j-version>1.7.5</slf4j-version>
+		<sitemesh-version>2.4.2</sitemesh-version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -58,6 +59,12 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
+		<dependency>
+			<groupId>opensymphony</groupId>
+			<artifactId>sitemesh</artifactId>
+			<version>${sitemesh-version}</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>
@@ -83,7 +90,7 @@
 					<server>myserver</server>
 				</configuration>
 			</plugin>
-		
+
 		</plugins>
 		<finalName>bikewars</finalName>
 	</build>
