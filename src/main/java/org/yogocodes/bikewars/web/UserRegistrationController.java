@@ -1,5 +1,7 @@
 package org.yogocodes.bikewars.web;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -50,9 +52,13 @@ public class UserRegistrationController {
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String register(@ModelAttribute final UserModel user) {
+	public String register(@ModelAttribute final UserModel user, final HttpSession session) {
 		log.trace("registering user: {}", user);
-
+		user.setUserId(System.currentTimeMillis());
+		final Date now = new Date();
+		user.setCreated(now);
+		user.setModified(now);
+		UserSessionUtil.setUser(session, user);
 		return "redirect:/ownpage.htm";
 	}
 
