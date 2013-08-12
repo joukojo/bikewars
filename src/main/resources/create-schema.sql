@@ -12,7 +12,8 @@ cash integer,
 primary key(id)
 )ENGINE = InnoDB;
 
-create unique index login_inx on users(email, password);
+create unique index email_inx on users(email);
+create index login_inx on users(email, password);
 
 create table stocks (
 id integer not null auto_increment,
@@ -24,10 +25,12 @@ primary key(id)
 
 create table user_stocks(
 id integer not null auto_increment,
+user_id integer,
 stock_id integer,
 count integer,
 purchase_date datetime,
 primary key(id),
-foreign key(stock_id) references stocks(id) on delete cascade
+foreign key(stock_id) references stocks(id) on delete cascade,
+foreign key(user_id) references users(id) on delete cascade
 )ENGINE = InnoDB;
 

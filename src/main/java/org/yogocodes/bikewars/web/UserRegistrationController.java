@@ -1,7 +1,5 @@
 package org.yogocodes.bikewars.web;
 
-import java.util.Date;
-
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -35,13 +33,14 @@ public class UserRegistrationController {
 	}
 
 	protected UserModel handleUserModification(final Long userId, final Long sessionUserId) {
+		final UserModel userModel;
 		if (userId == sessionUserId) {
-			// FIXME add the user loading from service
+			userModel = userService.getUser(sessionUserId);
 		} else {
-			log.warn("tried to modify another user's session");
-
+			log.warn("tried to modify another user's session, logged user: {}, tried to modify user {}", userId, sessionUserId);
+			userModel = userService.getUser(sessionUserId);
 		}
-		return new UserModel();
+		return userModel;
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -54,11 +53,18 @@ public class UserRegistrationController {
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String register(@ModelAttribute final UserModel user, final HttpSession session) {
 		log.trace("registering user: {}", user);
-		user.setUserId(System.currentTimeMillis());
-		final Date now = new Date();
-		user.setCreated(now);
-		user.setModified(now);
-		UserSessionUtil.setUser(session, user);
+		final Long userId = UserSessionUtil.getUserId(session);
+
+		if (userId != user.getUserId()) {
+			log.error("Failed to alter non-logged user '{}' login: '{}'", user.getUserId(), userId);
+			log.error("forcing user to logout");
+			return "redirect:/logout.htm";
+		}
+
+		final UserModel savedUser = userService.save(user);
+
+		UserSessionUtil.setUser(session, savedUser);
+
 		return "redirect:/ownpage.htm";
 	}
 
