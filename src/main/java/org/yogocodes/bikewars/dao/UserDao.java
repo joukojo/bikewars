@@ -6,4 +6,6 @@ public interface UserDao {
 
 	UserModel getUser(Long sessionUserId);
 
+	UserModel getUser(String userName, String password);
+
 }

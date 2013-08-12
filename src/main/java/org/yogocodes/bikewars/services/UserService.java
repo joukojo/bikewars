@@ -8,4 +8,6 @@ public interface UserService {
 
 	UserModel save(UserModel user);
 
+	UserModel getUser(String userName, String password);
+
 }

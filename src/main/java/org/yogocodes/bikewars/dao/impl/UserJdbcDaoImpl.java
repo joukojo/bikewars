@@ -1,15 +1,11 @@
 package org.yogocodes.bikewars.dao.impl;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Date;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Repository;
 import org.yogocodes.bikewars.dao.UserDao;
 import org.yogocodes.bikewars.model.UserModel;
@@ -32,27 +28,28 @@ public class UserJdbcDaoImpl implements UserDao {
 
 	@Override
 	public UserModel getUser(final Long sessionUserId) {
-		final ResultSetExtractor<UserModel> extractor = new ResultSetExtractor<UserModel>() {
-			@Override
-			public UserModel extractData(final ResultSet rs) throws SQLException, DataAccessException {
-				final UserModel userModel = new UserModel();
-				final Long userId = rs.getLong("user_id");
-				final Date created = rs.getDate("created");
-				final String email = rs.getString("email");
-				final Date modified = rs.getDate("modified");
-				final String password = rs.getString("password");
-				userModel.setUserId(userId);
-				userModel.setCreated(created);
-				userModel.setEmail(email);
-				userModel.setModified(modified);
-				userModel.setPassword(password);
-
-				log.trace("loaded usermodel: {}", userModel);
-				return userModel;
-			}
-		};
+		final UserResultSetExtractor extractor = new UserResultSetExtractor();
 		final Object params[] = { sessionUserId };
-		final UserModel userModel = jdbcTemplate.query("select * from users where user_id = ?", params, extractor);
-		return userModel;
+		final List<UserModel> users = jdbcTemplate.query("select * from users where user_id = ?", params, extractor);
+		if (users != null && !users.isEmpty()) {
+			return users.get(0);
+		}
+
+		return null;
+	}
+
+	@Override
+	public UserModel getUser(final String userName, final String password) {
+
+		final UserResultSetExtractor extractor = new UserResultSetExtractor();
+		final Object params[] = { userName, password };
+		final List<UserModel> users = jdbcTemplate.query("select * from users where email = ? and password = ?", params, extractor);
+
+		if (users != null && !users.isEmpty()) {
+			return users.get(0);
+		}
+
+		return null;
+
 	}
 }

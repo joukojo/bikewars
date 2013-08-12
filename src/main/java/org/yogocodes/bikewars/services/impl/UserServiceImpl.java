@@ -17,8 +17,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserModel getUser(final Long sessionUserId) {
-		// TODO Auto-generated method stub
-		return null;
+		final UserModel userModel = userDao.getUser(sessionUserId);
+		return userModel;
 	}
 
 	public UserDao getUserDao() {
@@ -33,6 +33,13 @@ public class UserServiceImpl implements UserService {
 	public UserModel save(final UserModel user) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public UserModel getUser(final String userName, final String password) {
+
+		log.trace("getting user by credetials: {} -> {}", userName, password);
+		return getUserDao().getUser(userName, password);
 	}
 
 }
