@@ -30,7 +30,7 @@ public class UserJdbcDaoImpl implements UserDao {
 	public UserModel getUser(final Long sessionUserId) {
 		final UserResultSetExtractor extractor = new UserResultSetExtractor();
 		final Object params[] = { sessionUserId };
-		final List<UserModel> users = jdbcTemplate.query("select * from users where user_id = ?", params, extractor);
+		final List<UserModel> users = jdbcTemplate.query("select * from users where id = ?", params, extractor);
 		if (users != null && !users.isEmpty()) {
 			return users.get(0);
 		}
