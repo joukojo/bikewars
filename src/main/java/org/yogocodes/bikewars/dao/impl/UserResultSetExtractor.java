@@ -14,13 +14,14 @@ public class UserResultSetExtractor implements RowMapper<UserModel> {
 
 	@Override
 	public UserModel mapRow(final ResultSet rs, final int rowNum) throws SQLException {
-		final UserModel userModel = new UserModel();
 
 		final Long userId = rs.getLong("id");
 		final Date created = rs.getDate("created");
 		final String email = rs.getString("email");
 		final Date modified = rs.getDate("modified");
 		final String password = rs.getString("password");
+
+		final UserModel userModel = new UserModel();
 		userModel.setUserId(userId);
 		userModel.setCreated(created);
 		userModel.setEmail(email);
