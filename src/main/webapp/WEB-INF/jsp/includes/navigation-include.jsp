@@ -14,17 +14,14 @@
 				<li class="active"><a href='<c:url value="/index.htm" />'>Home</a></li>
 				<c:choose>
 					<c:when test="${isLogged}">
-						<li><a href='<c:url value="/secure/profile.htm" />'>Profile</a></li>
-						<li><a href='<c:url value="/secure/stocks.htm" />' >Stocks</a></li>
-						<li><a href=''<c:url value="/secure/cities.htm" />'>Cities</a></li>
+						<li><a href='<c:url value="/personal/ownpage.htm" />'>Ownpage</a></li>
+						<li><a href='<c:url value="/personal/stocks.htm" />' >Stocks</a></li>
+						<li><a href=''<c:url value="/personal/cities.htm" />'>Cities</a></li>
 					</c:when>
 					<c:otherwise>
 						<li><a href='<c:url value="/register.htm" />'>Register</a></li>
 					</c:otherwise>
 				</c:choose>
-
-				
-
 			</ul>
 
 			<c:choose>
