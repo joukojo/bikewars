@@ -8,4 +8,6 @@ public interface UserDao {
 
 	UserModel getUser(String userName, String password);
 
+	UserModel save(UserModel user);
+
 }

@@ -1,5 +1,7 @@
 package org.yogocodes.bikewars.services.impl;
 
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +33,16 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserModel save(final UserModel user) {
-		// TODO Auto-generated method stub
-		return null;
+		log.trace("storing user:{}", user);
+		final Date now = new Date();
+		if (user.getUserId() == null) {
+			user.setCreated(now);
+		}
+		user.setModified(now);
+
+		final UserModel storedUser = getUserDao().save(user);
+
+		return storedUser;
 	}
 
 	@Override
