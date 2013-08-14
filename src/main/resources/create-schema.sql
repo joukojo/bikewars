@@ -1,7 +1,7 @@
-drop table if exists users;
 drop table if exists user_stocks; 
 drop table if exists stocks;
 drop table if exists user_profile; 
+drop table if exists users;
 
 create table users(
 id integer not null auto_increment,
@@ -9,6 +9,8 @@ email varchar(255),
 password varchar(255),
 status integer,
 cash integer,
+created timestamp,
+modified timestamp,
 primary key(id)
 )ENGINE = InnoDB;
 
@@ -28,7 +30,7 @@ id integer not null auto_increment,
 user_id integer,
 stock_id integer,
 count integer,
-purchase_date datetime,
+purchase_date timestamp,
 primary key(id),
 foreign key(stock_id) references stocks(id) on delete cascade,
 foreign key(user_id) references users(id) on delete cascade
@@ -44,9 +46,10 @@ cash integer,
 health integer,
 max_health integer,
 health_inc integer,
-created datetime,
-modified datetime,
-primary key(id) 
+created timestamp,
+modified timestamp,
+primary key(id),
+foreign key(id) references users(id) on delete cascade 
 ) ENGINE = InnoDB;
 
 
