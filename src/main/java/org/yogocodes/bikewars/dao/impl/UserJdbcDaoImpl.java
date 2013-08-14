@@ -28,9 +28,9 @@ public class UserJdbcDaoImpl implements UserDao {
 
 	@Override
 	public UserModel getUser(final Long sessionUserId) {
-		final UserResultSetExtractor extractor = new UserResultSetExtractor();
+		final UserRowMapper rowMapper = new UserRowMapper();
 		final Object params[] = { sessionUserId };
-		final List<UserModel> users = jdbcTemplate.query("select * from users where id = ?", params, extractor);
+		final List<UserModel> users = jdbcTemplate.query("select * from users where id = ?", params, rowMapper);
 		if (users != null && !users.isEmpty()) {
 			return users.get(0);
 		}
@@ -41,10 +41,10 @@ public class UserJdbcDaoImpl implements UserDao {
 	@Override
 	public UserModel getUser(final String userName, final String password) {
 
-		final UserResultSetExtractor extractor = new UserResultSetExtractor();
+		final UserRowMapper rowMapper = new UserRowMapper();
 		final Object params[] = { userName, password };
 		final long start = System.currentTimeMillis();
-		final List<UserModel> users = jdbcTemplate.query("select * from users where email = ? and password = ?", params, extractor);
+		final List<UserModel> users = jdbcTemplate.query("select * from users where email = ? and password = ?", params, rowMapper);
 		final long end = System.currentTimeMillis();
 		final long delta = end - start;
 		if (delta > 100L) {

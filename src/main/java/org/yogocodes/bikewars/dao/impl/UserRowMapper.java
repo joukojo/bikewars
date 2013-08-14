@@ -9,8 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.RowMapper;
 import org.yogocodes.bikewars.model.UserModel;
 
-public class UserResultSetExtractor implements RowMapper<UserModel> {
-	private final Logger log = LoggerFactory.getLogger(UserResultSetExtractor.class);
+public class UserRowMapper implements RowMapper<UserModel> {
+	private final Logger log = LoggerFactory.getLogger(UserRowMapper.class);
 
 	@Override
 	public UserModel mapRow(final ResultSet rs, final int rowNum) throws SQLException {
