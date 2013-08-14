@@ -44,6 +44,8 @@ cash integer,
 health integer,
 max_health integer,
 health_inc integer,
+created datetime,
+modified datetime,
 primary key(id) 
 ) ENGINE = InnoDB;
 
