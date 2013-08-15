@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator"%>
+<%@include file="../taglibs.jsp"%>
 
+<c:if test="${not empty sessionScope.USER}" var="isLogged" />
 
 
 <html lang="en">
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@include file="../taglibs.jsp"%>
+
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -26,9 +27,29 @@
 	<div id="wrap">
 		<div class="navbar navbar-inverse navbar-fixed-top">
 			<jsp:include page="/WEB-INF/jsp/includes/navigation-include.jsp" />
-			<div class="container">
+			<div class="container-fluid">
 
+				<div class="row-fluid">
+				<span class="span1" >
+					<c:choose>
+						<c:when test="${isLogged}" >
+							<div id="user-status">
+								<p>NickName <span id="nickname">&nbsp;</span></p>
+								<p>Energy: <span  id="energy">&nbsp;</span>/ <span  id="max-energy">&nbsp;</span></p>
+								<p>Health:<span id="health">&nbsp;</span> /<span  id="max-health">&nbsp;</span></p>
+								<div id="cash">&nbsp;</div>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<p>Please login first</p>
+						</c:otherwise>
+					</c:choose>
+				</span>
+				<span class="span7">
+				
 				<decorator:body />
+				</span>
+				</div>
 			</div>
 		</div>
 		<div id="push"></div>
