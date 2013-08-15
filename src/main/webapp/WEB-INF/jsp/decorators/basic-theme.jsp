@@ -37,7 +37,7 @@
 								<p>NickName <span id="nickname">&nbsp;</span></p>
 								<p>Energy: <span  id="energy">&nbsp;</span>/ <span  id="max-energy">&nbsp;</span></p>
 								<p>Health:<span id="health">&nbsp;</span> /<span  id="max-health">&nbsp;</span></p>
-								<div id="cash">&nbsp;</div>
+								<p>cash:<span  id="cash">&nbsp;</span>
 							</div>
 						</c:when>
 						<c:otherwise>
@@ -46,8 +46,7 @@
 					</c:choose>
 				</span>
 				<span class="span7">
-				
-				<decorator:body />
+					<decorator:body />
 				</span>
 				</div>
 			</div>
