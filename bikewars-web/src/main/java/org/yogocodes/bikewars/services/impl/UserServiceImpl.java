@@ -19,6 +19,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserModel getUser(final Long sessionUserId) {
+		log.trace("getting user #{}", sessionUserId);
+
 		final UserModel userModel = userDao.getUser(sessionUserId);
 		return userModel;
 	}
