@@ -26,7 +26,7 @@ public class UserProfileUpdateTask {
 	@Scheduled(fixedRate = 60000, initialDelay = 30000)
 	public void updateEnergies() {
 		log.error("updating user energies");
-		final String sql = "update user_profile set energy = if( energy + energy_inc < max_energy, energy+energy_inc, max_energy ), updated=now() where energy < max_energy";
+		final String sql = "update user_profile set energy = if( energy + energy_inc < max_energy, energy+energy_inc, max_energy ), modified=now() where energy < max_energy";
 
 		jdbcTemplate.update(sql);
 
@@ -37,7 +37,7 @@ public class UserProfileUpdateTask {
 	@Scheduled(fixedRate = 60000, initialDelay = 60000)
 	public void updateHealth() {
 		log.error("updating user health");
-		final String sql = "update user_profile set health = if( health + health_inc < max_health, health + health_inc, max_health ), updated=now()  where health < max_health";
+		final String sql = "update user_profile set health = if( health + health_inc < max_health, health + health_inc, max_health ), modified=now()  where health < max_health";
 
 		jdbcTemplate.update(sql);
 

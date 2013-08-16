@@ -11,9 +11,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><decorator:title default="bikewars" /></title>
-<link href='<c:url value="/css/bootstrap.css" />' rel="stylesheet" media="screen">
-<link href='<c:url value="/css/style.css" />' rel="stylesheet" media="screen">
-<link href='<c:url value="/css/bootstrap-responsive.css" />' rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet" media="screen">
+<link href='${pageContext.request.contextPath}/css/style.css' rel="stylesheet" media="screen">
+<link href='${pageContext.request.contextPath}/css/bootstrap-responsive.css' rel="stylesheet">
 
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
