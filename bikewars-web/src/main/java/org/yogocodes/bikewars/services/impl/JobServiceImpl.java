@@ -1,5 +1,6 @@
 package org.yogocodes.bikewars.services.impl;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -14,7 +15,8 @@ public class JobServiceImpl implements JobService {
 	private final Logger log = LoggerFactory.getLogger(JobServiceImpl.class);
 
 	public List<JobModel> getAllJobs(final Integer pageNum, final Integer pageSize) {
+		log.trace("get all jobs for {} / {}", pageNum, pageSize);
 
-		return null;
+		return Collections.emptyList();
 	}
 }
