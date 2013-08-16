@@ -28,7 +28,6 @@ public class UserServiceImplTest {
 
 		Assert.assertNotNull("acutal user is null", actualUser);
 		Assert.assertEquals("actual user is altered", userModel, actualUser);
-
 	}
 
 }
