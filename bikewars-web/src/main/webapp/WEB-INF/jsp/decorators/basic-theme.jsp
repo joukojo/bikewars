@@ -61,9 +61,9 @@
 		</div>
 
 	</div>
-	<script type="text/javascript" src='<c:url value="/js/jquery-1.10.2.min.js" />'></script>
-	<script type="text/javascript" src='<c:url value="/js/bootstrap.min.js" />'></script>
-	<script type="text/javascript" src='<c:url value="/js/bikewars.js" />'></script>
+	<script type="text/javascript" src='${pageContext.request.contextPath}/js/jquery-1.10.2.min.js'></script>
+	<script type="text/javascript" src='${pageContext.request.contextPath}/js/bootstrap.min.js'></script>
+	<script type="text/javascript" src='${pageContext.request.contextPath}/js/bikewars.js'></script>
 
 </body>
 
