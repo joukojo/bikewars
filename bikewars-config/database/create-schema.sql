@@ -2,6 +2,7 @@ drop table if exists user_stocks;
 drop table if exists stocks;
 drop table if exists user_profile; 
 drop table if exists users;
+drop table if exists user_jobs; 
 
 create table users(
 id integer not null auto_increment,
@@ -52,4 +53,13 @@ primary key(id),
 foreign key(id) references users(id) on delete cascade 
 ) ENGINE = InnoDB;
 
-
+create table user_jobs (
+id integer not null auto_increment,
+name varchar(255),
+description varchar(255),
+income integer,
+energy integer,
+created timestamp,
+modified timestamp,
+primary key(id)
+) ENGINE =InnoDB;
