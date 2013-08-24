@@ -28,7 +28,8 @@
 					<td><c:out value="${job.income}" /></td>
 					<td><c:out value="${job.energy}" /></td>
 					<td>
-						<button value="">Execute</button>
+					
+						<button name="execute" name="job" value="${job.id}">Execute</button>
 					</td>
 				</tr>
 				<c:if test="${inx.last}">
