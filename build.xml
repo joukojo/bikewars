@@ -7,38 +7,43 @@
 
 
 	<target name="help">
-
+		<echo>
+			deploy - deploys the war to the server and restarts the server (deploy-server, restart-tc)
+			restart-tc - restarts the tomcat 
+			deploy-server deploys the war package to the server
+		</echo>
 	</target>
 
-	<target name="init">
-		<available property="file.exists" file="build.properties"/>
+	<target name="init" unless="${file.exists}">
+		<available property="file.exists" file="build.properties" />
 		<property file="build.properties" />
 
 	</target>
 
 	<target name="create-properties" unless="${file.exists}" depends="init">
-		 <echo file="build.properties">
+		<echo file="build.properties">
 		 	username=tomcat
 		 	password=tomcat
 			server.ip=127.0.0.1
 		 	server.path=/opt/tomcat/webapps
-		 	
 		 	</echo>
+
 	</target>
 
 	<target name="deploy-server" depends="create-properties">
 		<scp file="bikewars-web/target/bikewars.war" todir="${username}@${server.ip}:${server.path}" password="${password}" trust="true" />
 	</target>
 
-	<target name="deploy" depends="deploy-server">
+	<target name="deploy">
+		<antcall target="deploy-server" />
+		<antcall target="restart-tc" />
+	</target>
+
+	<target name="restart-tc" depends="create-properties">
 		<sshexec host="${server.ip}" username="${username}" password="${password}" command="/opt/tomcat/bin/shutdown.sh" trust="true" />
-
 		<sshexec host="${server.ip}" username="${username}" password="${password}" command="pkill -9 java" trust="true" />
-
-
 		<sshexec host="${server.ip}" username="${username}" password="${password}" command="/opt/tomcat/bin/startup.sh" trust="true" />
 
 	</target>
-
 
 </project>
