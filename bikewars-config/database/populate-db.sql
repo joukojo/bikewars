@@ -20,3 +20,11 @@ insert into user_profile(id, nickname, energy, max_energy, energy_inc, health, m
 insert into user_profile(id, nickname, energy, max_energy, energy_inc, health, max_health, health_inc) values (8, 'user8', 1, 100, 10, 1, 100, 10); 
 insert into user_profile(id, nickname, energy, max_energy, energy_inc, health, max_health, health_inc) values (9, 'user9', 1, 100, 10, 1, 100, 10); 
 insert into user_profile(id, nickname, energy, max_energy, energy_inc, health, max_health, health_inc) values (10, 'user10', 1, 100, 10, 1, 100, 10); 
+
+
+INSERT INTO user_jobs  ( name, description, income, energy, created, modified) values('job1', 'job1 description', 10,10, now(), now());
+INSERT INTO user_jobs  ( name, description, income, energy, created, modified) values('job2', 'job2 description', 10,10, now(), now());
+INSERT INTO user_jobs  ( name, description, income, energy, created, modified) values('job3', 'job3 description', 30, 30, now(), now());
+INSERT INTO user_jobs  ( name, description, income, energy, created, modified) values('job4', 'job4 description', 40, 40, now(), now());
+INSERT INTO user_jobs  ( name, description, income, energy, created, modified) values('job5', 'job5 description', 50, 50, now(), now());
+INSERT INTO user_jobs  ( name, description, income, energy, created, modified) values('job6', 'job6 description', 60, 60, now(), now());
