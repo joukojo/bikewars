@@ -2,6 +2,8 @@ package org.yogocodes.bikewars.model;
 
 import java.util.Date;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 /*
  * create table user_jobs (
  id integer not null auto_increment,
@@ -80,4 +82,8 @@ public class JobModel {
 		this.modified = modified;
 	}
 
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
 }
