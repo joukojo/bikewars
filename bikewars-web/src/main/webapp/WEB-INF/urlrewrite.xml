@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
+        "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
+
+
+
+<urlrewrite default-match-type="wildcard">
+<!-- 	<rule> -->
+<!-- 		<note> -->
+<!-- 			The rule means that requests to /test/status/ will be redirected -->
+<!-- 			to -->
+<!-- 			/rewrite-status -->
+<!-- 			the url will be rewritten. -->
+<!-- 		</note> -->
+<!-- 		<from>/WEB-INF/view/*</from> -->
+<!-- 		<to>/WEB-INF/view/$1</to> -->
+<!-- 	</rule> -->
+
+	<rule match-type="wildcard">
+		<from>/css/**</from>
+		<to>/css/$1</to>
+	</rule>
+	<rule match-type="wildcard">
+		<from>/js/**</from>
+		<to>/js/$1</to>
+	</rule>
+	<rule match-type="wildcard">
+
+		<from>/**.htm</from>
+		<to>/app/$1</to>
+	</rule>
+	<rule match-type="wildcard">
+
+		<from>/**.json</from>
+		<to>/app/$1</to>
+	</rule>
+	<rule match-type="wildcard">
+
+		<from>/json/**</from>
+		<to>/app/$1</to>
+	</rule>	
+
+</urlrewrite>
