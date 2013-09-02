@@ -8,6 +8,7 @@ function updateCurrentUserInfo(val) {
 		var maxEnergy = data['maxEnergy'];
 		var health = data['health'];
 		var maxHealth = data['maxHealth'];
+		var cash = data['cash'];
 		// let's find the parent 
 		var parentElement = $('#user-status');
 		
@@ -16,6 +17,7 @@ function updateCurrentUserInfo(val) {
 		parentElement.find('#max-energy').html(maxEnergy);
 		parentElement.find('#health').html(health);
 		parentElement.find('#max-health').html(maxHealth);
+		parentElement.find('#cash').html(cash);
 	});
 	
 	return true;
@@ -35,12 +37,13 @@ $(document).ready(function () {
 			$(this).click( 
 					function() {
 						$(this).attr('disabled', 'disabled');
-						console.log($(this));
-						console.log($(this).attr('value'));
+//						console.log($(this));
+//						console.log($(this).attr('value'));
 						var jobId = $(this).attr("value");
 						var url = 'json/jobs/' + jobId + '.json';
-						console.log(url);
+//						console.log(url);
 						$.post(url);
+						updateCurrentUserInfo(1);
 						$(this).removeAttr('disabled');
 					}
 			
