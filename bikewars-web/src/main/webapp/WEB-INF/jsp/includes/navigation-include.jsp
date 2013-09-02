@@ -16,6 +16,7 @@
 					<c:when test="${isLogged}">
 						<li><a href='${pageContext.request.contextPath}/personal/ownpage.htm'>Ownpage</a></li>
 						<li><a href='${pageContext.request.contextPath}/personal/stocks.htm' >Stocks</a></li>
+						<li><a href='${pageContext.request.contextPath}/personal/jobs.htm' >Jobs</a></li>
 						<li><a href='${pageContext.request.contextPath}/personal/cities.htm'>Cities</a></li>
 					</c:when>
 					<c:otherwise>
