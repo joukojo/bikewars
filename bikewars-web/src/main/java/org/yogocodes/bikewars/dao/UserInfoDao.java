@@ -6,4 +6,6 @@ public interface UserInfoDao {
 
 	UserInfoModel getUserInfo(Long userId);
 
+	void save(UserInfoModel userInfo);
+
 }

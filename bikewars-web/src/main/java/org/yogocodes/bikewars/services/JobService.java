@@ -10,4 +10,6 @@ public interface JobService {
 
 	JobModel getJobById(Long jobId);
 
+	void executeJob(Long userId, Long jobId);
+
 }

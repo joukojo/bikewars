@@ -24,4 +24,10 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 		return userInfo;
 	}
+
+	@Override
+	public void saveUserInfo(final UserInfoModel userInfo) {
+		userInfoDao.save(userInfo);
+
+	}
 }

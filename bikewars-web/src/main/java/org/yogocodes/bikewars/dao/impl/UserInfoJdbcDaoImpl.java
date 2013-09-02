@@ -39,4 +39,10 @@ public class UserInfoJdbcDaoImpl implements UserInfoDao {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
+	@Override
+	public void save(final UserInfoModel userInfo) {
+		final Object params[] = { userInfo.getEnergy(), userInfo.getCash(), userInfo.getUserId() };
+		jdbcTemplate.update("update user_profile set energy = ?, cash=? where id = ?", params);
+	}
+
 }

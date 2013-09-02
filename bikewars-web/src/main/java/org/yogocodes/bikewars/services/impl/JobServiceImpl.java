@@ -8,12 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.yogocodes.bikewars.dao.JobDao;
 import org.yogocodes.bikewars.model.JobModel;
+import org.yogocodes.bikewars.model.UserInfoModel;
 import org.yogocodes.bikewars.services.JobService;
+import org.yogocodes.bikewars.services.UserInfoService;
 
 @Service("jobService")
 public class JobServiceImpl implements JobService {
 
 	private final Logger log = LoggerFactory.getLogger(JobServiceImpl.class);
+
+	@Autowired
+	private UserInfoService userService;
 
 	@Autowired
 	private JobDao jobDao;
@@ -40,4 +45,16 @@ public class JobServiceImpl implements JobService {
 		log.trace("getting job by id {}", jobId);
 		return getJobDao().getJobById(jobId);
 	}
+
+	@Override
+	public void executeJob(final Long userId, final Long jobId) {
+		final JobModel job = getJobById(jobId);
+		final UserInfoModel userInfo = userService.getUserInfo(userId);
+
+		userInfo.setCash(userInfo.getCash() + job.getIncome());
+		userInfo.setEnergy(userInfo.getEnergy() - job.getEnergy());
+
+		userService.saveUserInfo(userInfo);
+	}
+
 }
