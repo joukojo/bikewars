@@ -7,8 +7,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.yogocodes.bikewars.model.JobModel;
 import org.yogocodes.bikewars.services.JobService;
 
@@ -28,6 +30,15 @@ public class JobController {
 
 		model.addAttribute("jobs", jobs);
 		return "personal/jobs";
+	}
+
+	@RequestMapping(value = "/json/jobs/{jobId}")
+	@ResponseBody
+	public JobModel viewJob(@PathVariable final Long jobId) {
+		log.trace("viewing job #{}", jobId);
+		final JobModel job = getJobService().getJobById(jobId);
+
+		return job;
 	}
 
 	public JobService getJobService() {

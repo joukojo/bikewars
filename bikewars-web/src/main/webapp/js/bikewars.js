@@ -25,10 +25,21 @@ $(document).ready(function () {
 	
 	if($('#user-status').length != 0) {
 		updateCurrentUserInfo(1);
-		setInterval(function(){updateCurrentUserInfo(1)},5000);
-
+		setInterval(function(){updateCurrentUserInfo(1)},30000);
 	}
 	 
+	if( $('button.jobExecute').length != 0 ) {
+		$('button.jobExecute').each( function(button) {
+			console.log(button);
+			button.click( function() {
+				 alert($(this).val())
+			})
+		});
+		
+		
+		
+		
+	}
 	  
   
 });

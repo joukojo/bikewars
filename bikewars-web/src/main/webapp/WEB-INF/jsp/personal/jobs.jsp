@@ -29,7 +29,7 @@
 					<td><c:out value="${job.energy}" /></td>
 					<td>
 					
-						<button name="execute" name="job" value="${job.id}">Execute</button>
+						<button class="jobExecute" name="execute" name="job" value="${job.jobId}">Execute</button>
 					</td>
 				</tr>
 				<c:if test="${inx.last}">
