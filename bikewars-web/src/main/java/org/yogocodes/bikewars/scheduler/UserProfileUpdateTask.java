@@ -16,7 +16,7 @@ public class UserProfileUpdateTask {
 	private final Logger log = LoggerFactory.getLogger(UserProfileUpdateTask.class);
 
 	public UserProfileUpdateTask() {
-		log.error("INIT");
+		log.info("INIT");
 	}
 
 	// Query
@@ -25,12 +25,12 @@ public class UserProfileUpdateTask {
 
 	@Scheduled(fixedRate = 60000, initialDelay = 30000)
 	public void updateEnergies() {
-		log.error("updating user energies");
+		log.info("updating user energies");
 		final String sql = "update user_profile set energy = if( energy + energy_inc < max_energy, energy+energy_inc, max_energy ), modified=now() where energy < max_energy";
 
 		jdbcTemplate.update(sql);
 
-		log.error("updated user energies");
+		log.info("updated user energies");
 
 	}
 
