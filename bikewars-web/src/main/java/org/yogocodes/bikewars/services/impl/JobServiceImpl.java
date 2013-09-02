@@ -34,4 +34,10 @@ public class JobServiceImpl implements JobService {
 	public void setJobDao(final JobDao jobDao) {
 		this.jobDao = jobDao;
 	}
+
+	@Override
+	public JobModel getJobById(final Long jobId) {
+		log.trace("getting job by id {}", jobId);
+		return getJobDao().getJobById(jobId);
+	}
 }

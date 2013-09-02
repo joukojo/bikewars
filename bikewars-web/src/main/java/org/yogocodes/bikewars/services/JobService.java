@@ -8,4 +8,6 @@ public interface JobService {
 
 	List<JobModel> getAllJobs(Integer pageNum, Integer pageSize);
 
+	JobModel getJobById(Long jobId);
+
 }
