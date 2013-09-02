@@ -20,16 +20,18 @@
 					<th>income</th>
 					<th>energy</th>
 					<th>&nbsp;</th>
-					
+
 				</tr>
 				</c:if>
 				<tr>
-					<td><c:out value="${job.name}" /><br /><c:out value="${job.description}" /></td>
+					<td><c:out value="${job.name}" /><br />
+					<c:out value="${job.description}" /></td>
 					<td><c:out value="${job.income}" /></td>
 					<td><c:out value="${job.energy}" /></td>
 					<td>
-					
-						<button class="jobExecute" name="execute" name="job" value="${job.jobId}">Execute</button>
+						
+							<button class="jobExecute" name="execute" name="job" value="${job.jobId}">Execute</button>
+						
 					</td>
 				</tr>
 				<c:if test="${inx.last}">

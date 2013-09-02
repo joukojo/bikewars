@@ -30,10 +30,23 @@ $(document).ready(function () {
 	 
 	if( $('button.jobExecute').length != 0 ) {
 		$('button.jobExecute').each( function(button) {
-			console.log(button);
-			button.click( function() {
-				 alert($(this).val())
-			})
+			
+//			console.log($(this));
+			$(this).click( 
+					function() {
+						$(this).attr('disabled', 'disabled');
+						console.log($(this));
+						console.log($(this).attr('value'));
+						var jobId = $(this).attr("value");
+						var url = 'json/jobs/' + jobId + '.json';
+						console.log(url);
+						$.post(url);
+						$(this).removeAttr('disabled');
+					}
+			
+			);
+			
+			
 		});
 		
 		

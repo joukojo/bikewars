@@ -32,7 +32,7 @@ public class JobController {
 		return "personal/jobs";
 	}
 
-	@RequestMapping(value = "/json/jobs/{jobId}")
+	@RequestMapping(value = "/json/jobs/{jobId}", method = RequestMethod.GET)
 	@ResponseBody
 	public JobModel viewJob(@PathVariable final Long jobId) {
 		log.trace("viewing job #{}", jobId);
@@ -48,4 +48,14 @@ public class JobController {
 	public void setJobService(final JobService jobService) {
 		this.jobService = jobService;
 	}
+
+	@RequestMapping(value = "/personal/json/jobs/{jobId}", method = RequestMethod.POST)
+	@ResponseBody
+	public JobModel executeJob(@PathVariable final Long jobId) {
+		log.trace("executing job #{}", jobId);
+		final JobModel job = getJobService().getJobById(jobId);
+
+		return job;
+	}
+
 }
