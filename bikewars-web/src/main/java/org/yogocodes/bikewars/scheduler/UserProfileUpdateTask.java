@@ -16,7 +16,7 @@ public class UserProfileUpdateTask {
 	private final Logger log = LoggerFactory.getLogger(UserProfileUpdateTask.class);
 
 	public UserProfileUpdateTask() {
-		log.info("INIT");
+		log.info("user profile update task initialized");
 	}
 
 	// Query
@@ -36,12 +36,12 @@ public class UserProfileUpdateTask {
 
 	@Scheduled(fixedRate = 60000, initialDelay = 60000)
 	public void updateHealth() {
-		log.error("updating user health");
+		log.info("updating user health");
 		final String sql = "update user_profile set health = if( health + health_inc < max_health, health + health_inc, max_health ), modified=now()  where health < max_health";
 
 		jdbcTemplate.update(sql);
 
-		log.error("updated user healths");
+		log.info("updated user healths");
 
 	}
 }
