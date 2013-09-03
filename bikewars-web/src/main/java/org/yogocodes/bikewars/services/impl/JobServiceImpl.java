@@ -50,11 +50,12 @@ public class JobServiceImpl implements JobService {
 	public void executeJob(final Long userId, final Long jobId) {
 		final JobModel job = getJobById(jobId);
 		final UserInfoModel userInfo = userService.getUserInfo(userId);
+		if (job.getEnergy() <= userInfo.getEnergy()) {
+			userInfo.setCash(userInfo.getCash() + job.getIncome());
+			userInfo.setEnergy(userInfo.getEnergy() - job.getEnergy());
+			userService.saveUserInfo(userInfo);
+		}
 
-		userInfo.setCash(userInfo.getCash() + job.getIncome());
-		userInfo.setEnergy(userInfo.getEnergy() - job.getEnergy());
-
-		userService.saveUserInfo(userInfo);
 	}
 
 }
