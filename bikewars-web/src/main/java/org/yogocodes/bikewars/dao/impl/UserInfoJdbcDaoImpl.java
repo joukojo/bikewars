@@ -41,8 +41,8 @@ public class UserInfoJdbcDaoImpl implements UserInfoDao {
 
 	@Override
 	public void save(final UserInfoModel userInfo) {
-		final Object params[] = { userInfo.getEnergy(), userInfo.getCash(), userInfo.getUserId() };
-		jdbcTemplate.update("update user_profile set energy = ?, cash=? where id = ?", params);
+		final Object params[] = { userInfo.getCreated(), userInfo.getEnergyIncrement(), userInfo.getEnergy(), userInfo.getCash(), userInfo.getUserId() };
+		jdbcTemplate.update("update user_profile set created = ?, energy_inc = ?, energy = ?, cash=? where id = ?", params);
 	}
 
 }
