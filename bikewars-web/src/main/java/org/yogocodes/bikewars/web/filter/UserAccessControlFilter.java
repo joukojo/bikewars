@@ -41,7 +41,7 @@ public class UserAccessControlFilter implements Filter {
 
 		if (userId == null) {
 			log.debug("the user is not logged in");
-			final String url = request.getContextPath() + "/login.htm";
+			final String url = request.getContextPath() + "/user-login.htm";
 			response.sendRedirect(url);
 		} else {
 			log.debug("the user is logged in");
