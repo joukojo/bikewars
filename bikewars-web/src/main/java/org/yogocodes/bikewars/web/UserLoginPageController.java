@@ -39,7 +39,7 @@ public class UserLoginPageController {
 			log.trace("setting the user session");
 			UserSessionUtil.setUser(session, userModel);
 		}
-		return "redirect:index.htm";
+		return "redirect:personal/ownpage.htm";
 	}
 
 	public UserService getUserService() {
