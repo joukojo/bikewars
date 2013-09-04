@@ -34,7 +34,7 @@ public class UserRegistrationController {
 
 	protected UserModel handleUserModification(final Long userId, final Long sessionUserId) {
 		final UserModel userModel;
-		if (userId == sessionUserId) {
+		if (userId.equals(sessionUserId)) {
 			userModel = userService.getUser(sessionUserId);
 		} else {
 			log.warn("tried to modify another user's session, logged user: {}, tried to modify user {}", userId, sessionUserId);
@@ -55,7 +55,7 @@ public class UserRegistrationController {
 		log.trace("registering user: {}", user);
 		final Long userId = UserSessionUtil.getUserId(session);
 
-		if (userId != user.getUserId()) {
+		if (!userId.equals(user.getUserId())) {
 			log.error("Failed to alter non-logged user '{}' login: '{}'", user.getUserId(), userId);
 			log.error("forcing user to logout");
 			return "redirect:/logout.htm";
