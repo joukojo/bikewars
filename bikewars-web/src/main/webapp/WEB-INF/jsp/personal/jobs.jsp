@@ -14,15 +14,14 @@
 
 	<c:forEach items="${jobs}" var="job" varStatus="inx">
 		<c:if test="${inx.first}">
-			<table>
+			<table id="job-list">
 				<tr>
 					<th>Job</th>
 					<th>income</th>
 					<th>energy</th>
 					<th>&nbsp;</th>
-
 				</tr>
-				</c:if>
+		</c:if>
 				<tr>
 					<td><c:out value="${job.name}" /><br />
 					<c:out value="${job.description}" /></td>
@@ -35,10 +34,8 @@
 					</td>
 				</tr>
 				<c:if test="${inx.last}">
-			</table>
-		</c:if>
+					</table>
+				</c:if>
 	</c:forEach>
-
-
 </body>
 </html>
