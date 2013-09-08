@@ -15,7 +15,7 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="username" value="bikeuser" />
 		<property name="password" value="bikepassword" />
-		<property name="url" value="jdbc:mysql://192.168.1.106:3306/bikewars" />
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/bikewars" />
 		<property name="initialSize" value="5" />	
 	</bean>
 

@@ -14,7 +14,7 @@
 
 	<c:forEach items="${jobs}" var="job" varStatus="inx">
 		<c:if test="${inx.first}">
-			<table id="job-list">
+			<table class="table table-striped table-bordered table-condensed">
 				<tr>
 					<th>Job</th>
 					<th>income</th>

@@ -28,3 +28,18 @@ INSERT INTO user_jobs  ( name, description, income, energy, created, modified) v
 INSERT INTO user_jobs  ( name, description, income, energy, created, modified) values('job4', 'job4 description', 40, 40, now(), now());
 INSERT INTO user_jobs  ( name, description, income, energy, created, modified) values('job5', 'job5 description', 50, 50, now(), now());
 INSERT INTO user_jobs  ( name, description, income, energy, created, modified) values('job6', 'job6 description', 60, 60, now(), now());
+
+INSERT INTO stocks (id, name, description, current_price, created, modified) VALUES (15, 'stock name 15', 'stock description 15', 10, now(), now());
+INSERT INTO stocks (id, name, description, current_price, created, modified) VALUES (16, 'stock name 16', 'stock description 16', 12, now(), now());
+INSERT INTO stocks (id, name, description, current_price, created, modified) VALUES (17, 'stock name 17', 'stock description 17', 10, now(), now());
+INSERT INTO stocks (id, name, description, current_price, created, modified) VALUES (18, 'stock name 18', 'stock description 18', 12, now(), now());
+INSERT INTO stocks (id, name, description, current_price, created, modified) VALUES (19, 'stock name 19', 'stock description 19', 10, now(), now());
+INSERT INTO stocks (id, name, description, current_price, created, modified) VALUES (20, 'stock name 20', 'stock description 20', 12, now(), now());
+INSERT INTO stocks (id, name, description, current_price, created, modified) VALUES (28, 'stock name 28', 'stock description 28', 10, now(), now());
+INSERT INTO stocks (id, name, description, current_price, created, modified) VALUES (29, 'stock name 29', 'stock description 29', 12, now(), now());
+INSERT INTO stocks (id, name, description, current_price, created, modified) VALUES (30, 'stock name 30', 'stock description 30', 10, now(), now());
+INSERT INTO stocks (id, name, description, current_price, created, modified) VALUES (31, 'stock name 31', 'stock description 31', 12, now(), now());
+INSERT INTO stocks (id, name, description, current_price, created, modified) VALUES (32, 'stock name 32', 'stock description 32', 10, now(), now());
+INSERT INTO stocks (id, name, description, current_price, created, modified) VALUES (33, 'stock name 33', 'stock description 33', 12, now(), now());
+INSERT INTO stocks (id, name, description, current_price, created, modified) VALUES (34, 'stock name 34', 'stock description 34', 10, now(), now());
+INSERT INTO stocks (id, name, description, current_price, created, modified) VALUES (35, 'stock name 35', 'stock description 35', 12, now(), now());

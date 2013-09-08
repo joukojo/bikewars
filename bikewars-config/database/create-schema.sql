@@ -23,6 +23,8 @@ id integer not null auto_increment,
 name varchar(255),
 description text,
 current_price integer,
+created timestamp,
+modified timestamp,
 primary key(id)
 )ENGINE = InnoDB;
 
@@ -32,6 +34,7 @@ user_id integer,
 stock_id integer,
 count integer,
 purchase_date timestamp,
+purchase_price integer,
 primary key(id),
 foreign key(stock_id) references stocks(id) on delete cascade,
 foreign key(user_id) references users(id) on delete cascade
@@ -63,3 +66,6 @@ created timestamp,
 modified timestamp,
 primary key(id)
 ) ENGINE =InnoDB;
+
+
+
