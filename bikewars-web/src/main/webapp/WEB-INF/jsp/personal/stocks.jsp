@@ -15,7 +15,7 @@
 	</div>
 
 
-	<table class="table table-striped table-bordered table-condensed">
+	<table class="table table-striped table-bordered table-condensed table-hover">
 		<c:forEach items="${stocks}" var="stock" varStatus="inx">
 			<c:if test="${inx.first}">
 				<tr>
@@ -25,15 +25,15 @@
 					<th>Owned</th>
 					<th>Paid</th>
 					<th>Current price</th>
-					<th>&nbsp;</th>
+					<th colspan="4">&nbsp;</th>
 				</tr>
 			</c:if>
 			<tr>
 				<td><c:out value="${stock.stockId}" /></td>
 				<td><c:out value="${stock.name}" /></td>
 				<td><c:out value="${stock.description}" /></td>
-				<td>user count</td>
-				<td>user paid</td>
+				<td><c:out value="${stock.count }" /></td>
+				<td><c:out value="${stock.purchasePrice}" /></td>
 				<td><c:out value="${stock.currentPrice}" /></td>
 				<td><button type="button" value="buy" name="buy">Buy</button></td>
 				<td><button type="button" value="buy" name="buy">Buy 5</button></td>

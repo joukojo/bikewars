@@ -15,6 +15,7 @@ public class UserStockModel {
 	private Long count;
 	private Date purchaseDate;
 	private Long purchasePrice;
+	private Long stockId;
 
 	public Long getId() {
 		return id;
@@ -59,6 +60,14 @@ public class UserStockModel {
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
+	}
+
+	public Long getStockId() {
+		return stockId;
+	}
+
+	public void setStockId(Long stockId) {
+		this.stockId = stockId;
 	}
 
 }
