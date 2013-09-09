@@ -41,4 +41,15 @@ public class UserStockServiceImpl implements UserStockService {
 		return groupedUserStocks;
 	}
 
+	@Override
+	public UserStockModel getStockByUser(final Long userId, final Long stockId) {
+		return userStockDao.getUserStock(userId, stockId);
+	}
+
+	@Override
+	public void save(final UserStockModel stockByUser) {
+		// TODO Auto-generated method stub
+
+	}
+
 }

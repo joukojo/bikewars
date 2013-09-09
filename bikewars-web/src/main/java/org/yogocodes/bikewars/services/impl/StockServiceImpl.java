@@ -26,4 +26,13 @@ public class StockServiceImpl implements StockService {
 		return stocks;
 	}
 
+	@Override
+	public StockModel getStockById(final Long stockId) {
+		logger.trace("getting stock #{}", stockId);
+
+		final StockModel stockModel = stockDao.getStockById(stockId);
+		logger.trace("got stock #{} - {}", stockId, stockModel);
+		return stockModel;
+	}
+
 }

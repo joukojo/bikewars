@@ -35,10 +35,10 @@
 				<td><c:out value="${stock.count }" /></td>
 				<td><c:out value="${stock.purchasePrice}" /></td>
 				<td><c:out value="${stock.currentPrice}" /></td>
-				<td><button type="button" value="buy" name="buy">Buy</button></td>
-				<td><button type="button" value="buy" name="buy">Buy 5</button></td>
-				<td><button type="button" value="buy" name="buy">Sell</button></td>
-				<td><button type="button" value="buy" name="buy">Sell 5</button></td>
+				<td><button class="stockEvent" type="button" value="${stock.stockId}" name="buy">Buy</button></td>
+				<td><button class="stockEvent" type="button" value="${stock.stockId}" name="buy5">Buy 5</button></td>
+				<td><button class="stockEvent" type="button" value="${stock.stockId}" name="sell">Sell</button></td>
+				<td><button class="stockEvent"  type="button" value="${stock.stockId}" name="sell5">Sell 5</button></td>
 
 			</tr>
 

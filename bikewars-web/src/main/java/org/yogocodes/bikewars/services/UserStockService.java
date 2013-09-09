@@ -9,4 +9,8 @@ public interface UserStockService {
 	List<UserStockModel> getUserStocks(final Long userId);
 
 	Map<Long, UserStockModel> getGroupedUserStocks(Long userId);
+
+	UserStockModel getStockByUser(Long userId, Long stockId);
+
+	void save(UserStockModel stockByUser);
 }

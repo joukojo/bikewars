@@ -8,4 +8,6 @@ public interface StockService {
 
 	List<StockModel> getStocks();
 
+	StockModel getStockById(Long stockId);
+
 }
