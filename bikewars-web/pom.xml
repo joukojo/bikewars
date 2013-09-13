@@ -7,6 +7,15 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>bikewars Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<name>oss.sonatype.org</name>
+			<id>oss.sonatype.org</id>
+			<url>http://oss.sonatype.org/content/groups/public</url>
+		</pluginRepository>
+	</pluginRepositories>
+
 	<properties>
 		<project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
 		<junit-version>4.11</junit-version>
@@ -21,6 +30,8 @@
 		<commons-lang3-version>3.1</commons-lang3-version>
 		<mockito-core-version>1.9.5</mockito-core-version>
 		<jackson-version>1.9.11</jackson-version>
+
+		<maven.yuicompressor.nosuffix>true</maven.yuicompressor.nosuffix>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -105,7 +116,7 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>${commons-lang3-version}</version>
 		</dependency>
-			<!-- Jackson JSON Mapper -->
+		<!-- Jackson JSON Mapper -->
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
@@ -137,6 +148,11 @@
 				</configuration>
 			</plugin>
 
+			<plugin>
+				<groupId>net.alchim31.maven</groupId>
+				<artifactId>yuicompressor-maven-plugin</artifactId>
+				<version>1.1</version>
+			</plugin>
 		</plugins>
 		<finalName>bikewars</finalName>
 	</build>

@@ -59,18 +59,12 @@ public class UserStockJdbcDaoImpl implements UserStockDao {
 	}
 
 	private void update(final UserStockModel stockByUser) {
-		// TODO Auto-generated method stub
-
+		final String sql = "update user_stocks set user_id = ?, stock_id = ?, count = ?, purchase_date = ?, purchase_price = ? where id = ?";
+		final Object params[] = { stockByUser.getUserId(), stockByUser.getStockId(), stockByUser.getCount(), stockByUser.getPurchaseDate(), stockByUser.getPurchasePrice(), stockByUser.getId() };
+		jdbcTemplate.update(sql, params);
 	}
 
 	private void insert(final UserStockModel stockByUser) {
-		/*
-		 * final long id = rs.getLong("id"); final Long userId =
-		 * rs.getLong("user_id"); final long stockId = rs.getLong("stock_id");
-		 * final Long count = rs.getLong("count"); final Date purchaseDate =
-		 * rs.getDate("purchase_date"); final long purchasePrice =
-		 * rs.getLong("purchase_price");
-		 */
 		final String sql = "insert into user_stocks (user_id, stock_id, count, purchase_date, purchase_price) values (?, ?, ?, ? ,?)";
 		final Object params[] = { stockByUser.getUserId(), stockByUser.getStockId(), stockByUser.getCount(), stockByUser.getPurchaseDate(), stockByUser.getPurchasePrice() };
 		jdbcTemplate.update(sql, params);

@@ -48,7 +48,7 @@ public class UserStockServiceImpl implements UserStockService {
 
 	@Override
 	public void save(final UserStockModel stockByUser) {
-		// TODO Auto-generated method stub
+		userStockDao.save(stockByUser);
 
 	}
 

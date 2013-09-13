@@ -85,8 +85,13 @@ public class StockController {
 					stockByUser.setCount(1L);
 					stockByUser.setPurchasePrice(stockById.getCurrentPrice());
 					stockByUser.setPurchaseDate(new Date());
-
+					stockByUser.setUserId(userId);
+					stockByUser.setStockId(stockId);
 				}
+				final Integer newCash = (int) (cash - stockById.getCurrentPrice());
+				userInfo.setCash(newCash);
+				userInfoService.saveUserInfo(userInfo);
+				userStockService.save(stockByUser);
 			}
 
 		} else if ("buy5".equals(event)) {

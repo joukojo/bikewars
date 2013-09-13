@@ -9,33 +9,37 @@
 </head>
 <body>
 
-	<h1>Listing jobs</h1>
+	<div class="page-header">
+		<h1>
+			Jobs <small>For executing jobs to gain money</small>
+		</h1>
+	</div>
 
 
-	<c:forEach items="${jobs}" var="job" varStatus="inx">
-		<c:if test="${inx.first}">
-			<table class="table table-striped table-bordered table-condensed">
+	<table class="table table-striped table-bordered table-condensed">
+		<c:forEach items="${jobs}" var="job" varStatus="inx">
+			<c:if test="${inx.first}">
+
 				<tr>
 					<th>Job</th>
 					<th>income</th>
 					<th>energy</th>
 					<th>&nbsp;</th>
 				</tr>
-		</c:if>
-				<tr>
-					<td><c:out value="${job.name}" /><br />
-					<c:out value="${job.description}" /></td>
-					<td><c:out value="${job.income}" /></td>
-					<td><c:out value="${job.energy}" /></td>
-					<td>
-						
-							<button class="jobExecute" name="execute" name="job" value="${job.jobId}">Execute</button>
-						
-					</td>
-				</tr>
-				<c:if test="${inx.last}">
-					</table>
-				</c:if>
-	</c:forEach>
+			</c:if>
+			<tr>
+				<td><c:out value="${job.name}" /><br /> <c:out value="${job.description}" /></td>
+				<td><c:out value="${job.income}" /></td>
+				<td><c:out value="${job.energy}" /></td>
+				<td>
+
+					<button class="jobExecute" name="execute" name="job" value="${job.jobId}">Execute</button>
+
+				</td>
+			</tr>
+		</c:forEach>
+
+
+	</table>
 </body>
 </html>
