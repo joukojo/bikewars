@@ -130,8 +130,11 @@ public class StockController {
 				stockByUser.setCount(newCount);
 
 				final long stockPrice = stockByUser.getCount() * stockByUser.getPurchasePrice();
-				stockByUser.setPurchasePrice(stockPrice / newCount);
-
+				if (newCount == 0) {
+					stockByUser.setPurchasePrice(0L);
+				} else {
+					stockByUser.setPurchasePrice(stockPrice / newCount);
+				}
 				final Integer newCash = (int) (cash + amount * stockById.getCurrentPrice());
 				userInfo.setCash(newCash);
 				userInfoService.saveUserInfo(userInfo);
