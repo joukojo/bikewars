@@ -25,13 +25,13 @@
 		 	username=tomcat
 		 	password=tomcat
 			server.ip=127.0.0.1
-		 	server.path=/opt/tomcat/webapps
+		 	server.path=/opt/tomcat
 		 	</echo>
 
 	</target>
 
 	<target name="deploy-server" depends="create-properties">
-		<scp file="bikewars-web/target/bikewars.war" todir="${username}@${server.ip}:${server.path}" password="${password}" trust="true" />
+		<scp file="bikewars-web/target/bikewars.war" todir="${username}@${server.ip}:${server.path}/webapps" password="${password}" trust="true" />
 	</target>
 
 	<target name="deploy">
@@ -40,9 +40,9 @@
 	</target>
 
 	<target name="restart-tc" depends="create-properties">
-		<sshexec host="${server.ip}" username="${username}" password="${password}" command="/opt/tomcat/bin/shutdown.sh" trust="true" />
+		<sshexec host="${server.ip}" username="${username}" password="${password}" command="${server.path}/bin/shutdown.sh" trust="true" />
 		<sshexec host="${server.ip}" username="${username}" password="${password}" command="pkill -9 java" trust="true" />
-		<sshexec host="${server.ip}" username="${username}" password="${password}" command="/opt/tomcat/bin/startup.sh" trust="true" />
+		<sshexec host="${server.ip}" username="${username}" password="${password}" command="${server.path}/bin/startup.sh" trust="true" />
 
 	</target>
 
