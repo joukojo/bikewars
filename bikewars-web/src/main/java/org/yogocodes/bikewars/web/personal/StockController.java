@@ -66,45 +66,79 @@ public class StockController {
 		logger.trace("handling stock {} - {}", stockId, event);
 		final Long userId = UserSessionUtil.getUserId(httpSession);
 
-		final StockModel stockById = stockService.getStockById(stockId);
-
-		final UserInfoModel userInfo = userInfoService.getUserInfo(userId);
-
 		if ("buy".equals(event)) {
-			final Integer cash = userInfo.getCash();
-			UserStockModel stockByUser = userStockService.getStockByUser(userId, stockId);
-			if (cash >= stockById.getCurrentPrice()) {
-				if (stockByUser != null) {
-
-					final Long stockPrice = stockByUser.getCount() * stockByUser.getPurchasePrice() + stockById.getCurrentPrice();
-
-					stockByUser.setCount(stockByUser.getCount() + 1);
-					stockByUser.setPurchasePrice(stockPrice / stockByUser.getCount());
-				} else {
-					stockByUser = new UserStockModel();
-					stockByUser.setCount(1L);
-					stockByUser.setPurchasePrice(stockById.getCurrentPrice());
-					stockByUser.setPurchaseDate(new Date());
-					stockByUser.setUserId(userId);
-					stockByUser.setStockId(stockId);
-				}
-				final Integer newCash = (int) (cash - stockById.getCurrentPrice());
-				userInfo.setCash(newCash);
-				userInfoService.saveUserInfo(userInfo);
-				userStockService.save(stockByUser);
-			}
+			final long amount = 1L;
+			buyStock(userId, stockId, amount);
 
 		} else if ("buy5".equals(event)) {
+			final long amount = 5L;
+			buyStock(userId, stockId, amount);
 
 		} else if ("sell".equals(event)) {
+			sellStock(userId, stockId, 1L);
 
 		} else if ("sell5".equals(event)) {
-
+			sellStock(userId, stockId, 5L);
 		}
-
-		logger.trace("userid: {}", userId);
 
 		return new UserStockModel();
 
 	}
+
+	private void buyStock(final Long userId, final Long stockId, final long amount) {
+		final StockModel stockById = stockService.getStockById(stockId);
+
+		final UserInfoModel userInfo = userInfoService.getUserInfo(userId);
+
+		final Integer cash = userInfo.getCash();
+		UserStockModel stockByUser = userStockService.getStockByUser(userId, stockId);
+		if (cash >= stockById.getCurrentPrice()) {
+			if (stockByUser != null) {
+
+				final Long stockPrice = stockByUser.getCount() * stockByUser.getPurchasePrice() + amount * stockById.getCurrentPrice();
+
+				stockByUser.setCount(stockByUser.getCount() + amount);
+				stockByUser.setPurchasePrice(stockPrice / stockByUser.getCount());
+			} else {
+				stockByUser = new UserStockModel();
+				stockByUser.setCount(amount);
+				stockByUser.setPurchasePrice(stockById.getCurrentPrice());
+				stockByUser.setPurchaseDate(new Date());
+				stockByUser.setUserId(userId);
+				stockByUser.setStockId(stockId);
+			}
+			final Integer newCash = (int) (cash - amount * stockById.getCurrentPrice());
+			userInfo.setCash(newCash);
+			userInfoService.saveUserInfo(userInfo);
+			userStockService.save(stockByUser);
+		}
+	}
+
+	private void sellStock(final Long userId, final Long stockId, final long amount) {
+		final StockModel stockById = stockService.getStockById(stockId);
+
+		final UserInfoModel userInfo = userInfoService.getUserInfo(userId);
+
+		final Integer cash = userInfo.getCash();
+		final UserStockModel stockByUser = userStockService.getStockByUser(userId, stockId);
+
+		if (stockByUser != null) {
+
+			final long newCount = stockByUser.getCount() - amount;
+
+			if (newCount >= 0) {
+				stockByUser.setCount(newCount);
+
+				final long stockPrice = stockByUser.getCount() * stockByUser.getPurchasePrice();
+				stockByUser.setPurchasePrice(stockPrice / newCount);
+
+				final Integer newCash = (int) (cash + amount * stockById.getCurrentPrice());
+				userInfo.setCash(newCash);
+				userInfoService.saveUserInfo(userInfo);
+				userStockService.save(stockByUser);
+			}
+		}
+
+	}
+
 }
