@@ -66,6 +66,7 @@ $(document).ready(function() {
 					console.log('url' + url);
 					$.post(url, function(data) {
 						console.log(data);
+					    location.reload();
 					});
 					
 					
