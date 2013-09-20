@@ -25,6 +25,7 @@
 					<th>Owned</th>
 					<th>Paid</th>
 					<th>Current price</th>
+					<th>&nbsp;</th>
 					<th colspan="4">&nbsp;</th>
 				</tr>
 			</c:if>
@@ -35,10 +36,26 @@
 				<td><c:out value="${stock.count }" /></td>
 				<td><c:out value="${stock.purchasePrice}" /></td>
 				<td><c:out value="${stock.currentPrice}" /></td>
-				<td><button class="btn btn-success stockEvent" type="button" value="${stock.stockId}" name="buy">Buy</button></td>
-				<td><button class="btn btn-success stockEvent" type="button" value="${stock.stockId}" name="buy5">Buy 5</button></td>
-				<td><button class="btn btn-warning stockEvent" type="button" value="${stock.stockId}" name="sell">Sell</button></td>
-				<td><button class="btn btn-warning stockEvent"  type="button" value="${stock.stockId}" name="sell5">Sell 5</button></td>
+				<c:choose>
+				<c:when test="${not empty stock.purchasePrice }">
+					<c:choose>
+					<c:when test="${stock.purchasePrice lt stock.currentPrice}">
+						<td><p class="text-success"><c:out value="${stock.currentPrice - stock.purchasePrice}" /></p></td>
+					</c:when>
+					<c:otherwise>
+						<td><p class="text-danger"><c:out value="${stock.currentPrice - stock.purchasePrice}" /></p></td>	
+					</c:otherwise>
+					</c:choose>
+				
+				</c:when>
+				<c:otherwise>
+				<td>-</td>
+				</c:otherwise>
+				</c:choose>
+				<td><button class="btn btn-success stockEvent" type="button" value="${stock.stockId}" name="buy5">+5</button></td>
+				<td><button class="btn btn-success stockEvent" type="button" value="${stock.stockId}" name="buy">+1</button></td>
+				<td><button class="btn btn-warning stockEvent" type="button" value="${stock.stockId}" name="sell">-1</button></td>
+				<td><button class="btn btn-warning stockEvent"  type="button" value="${stock.stockId}" name="sell5">-5</button></td>
 
 			</tr>
 

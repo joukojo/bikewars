@@ -131,7 +131,7 @@ public class StockController {
 
 				final long stockPrice = stockByUser.getCount() * stockByUser.getPurchasePrice();
 				if (newCount == 0) {
-					stockByUser.setPurchasePrice(0L);
+					stockByUser.setPurchasePrice(null);
 				} else {
 					stockByUser.setPurchasePrice(stockPrice / newCount);
 				}

@@ -16,12 +16,17 @@ public class UserStockView {
 	private Date purchaseDate;
 	private Long purchasePrice;
 
-	public UserStockView(final UserStockModel userStock, final StockModel stockModel) {
+	public UserStockView(final UserStockModel userStock,
+			final StockModel stockModel) {
 		if (userStock != null) {
+
 			count = userStock.getCount();
 			id = userStock.getId();
 			purchaseDate = userStock.getPurchaseDate();
-			purchasePrice = userStock.getPurchasePrice();
+			if (userStock.getPurchasePrice() != null
+					&& userStock.getPurchasePrice().longValue() != 0L) {
+				purchasePrice = userStock.getPurchasePrice();
+			}
 			userId = userStock.getUserId();
 		} else {
 			count = 0L;

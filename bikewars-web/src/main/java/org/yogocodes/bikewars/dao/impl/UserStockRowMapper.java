@@ -10,7 +10,8 @@ import org.yogocodes.bikewars.model.UserStockModel;
 public class UserStockRowMapper implements RowMapper<UserStockModel> {
 
 	@Override
-	public UserStockModel mapRow(final ResultSet rs, final int rowNum) throws SQLException {
+	public UserStockModel mapRow(final ResultSet rs, final int rowNum)
+			throws SQLException {
 
 		final long id = rs.getLong("id");
 		final Long userId = rs.getLong("user_id");
