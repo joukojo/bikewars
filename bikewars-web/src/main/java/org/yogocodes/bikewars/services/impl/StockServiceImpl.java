@@ -35,4 +35,8 @@ public class StockServiceImpl implements StockService {
 		return stockModel;
 	}
 
+	@Override
+	public void save(StockModel stock) {
+		stockDao.save(stock);
+	}
 }

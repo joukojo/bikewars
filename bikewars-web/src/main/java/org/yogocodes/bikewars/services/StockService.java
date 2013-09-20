@@ -10,4 +10,6 @@ public interface StockService {
 
 	StockModel getStockById(Long stockId);
 
+	void save(StockModel stock);
+
 }

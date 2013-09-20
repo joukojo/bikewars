@@ -10,4 +10,6 @@ public interface StockDao {
 
 	StockModel getStockById(Long stockId);
 
+	void save(StockModel stock);
+
 }
