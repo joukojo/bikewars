@@ -18,6 +18,23 @@ public class StockModel {
 	private Long currentPrice;
 	private Date created;
 	private Date modified;
+	private Long minPrice; 
+	private Long deltaPrice;
+	public Long getMinPrice() {
+		return minPrice;
+	}
+
+	public void setMinPrice(Long minPrice) {
+		this.minPrice = minPrice;
+	}
+
+	public Long getDeltaPrice() {
+		return deltaPrice;
+	}
+
+	public void setDeltaPrice(Long deltaPrice) {
+		this.deltaPrice = deltaPrice;
+	}
 
 	public Long getStockId() {
 		return stockId;

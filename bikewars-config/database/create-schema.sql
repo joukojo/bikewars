@@ -23,6 +23,8 @@ id integer not null auto_increment,
 name varchar(255),
 description text,
 current_price integer,
+min_price integer,
+delta_price integer,
 created timestamp,
 modified timestamp,
 primary key(id)

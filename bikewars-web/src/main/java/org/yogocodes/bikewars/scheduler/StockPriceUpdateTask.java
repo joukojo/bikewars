@@ -31,17 +31,14 @@ public class StockPriceUpdateTask {
 		
 		
 		for (StockModel stock : allStocks) {
-			int delta = (int) (random.nextDouble() * 20);  
-			boolean isIncreaseValue = random.nextBoolean();
+			long delta = System.currentTimeMillis();  
 			
-			Long currentPrice = stock.getCurrentPrice();
-			Long newPrice; 
-			if( isIncreaseValue ) {
-				newPrice = (long) Math.round(currentPrice * (1.0d + (delta / 100.0d))); 
+			Long newPrice = (long) Math.round(stock.getMinPrice() + (double) (Math.sin(delta) * stock.getDeltaPrice())); 
+			
+			if( newPrice < stock.getMinPrice() ) {
+				newPrice = stock.getMinPrice();
 			}
-			else {
-				newPrice = (long) Math.round(currentPrice * ( 1.0d - (delta/100.0d)));
-			}
+			
 			stock.setCurrentPrice(newPrice);
 			stockService.save(stock);
 		}
