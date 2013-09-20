@@ -5,22 +5,27 @@
 
 
 <html lang="en">
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><decorator:title default="bikewars" /></title>
-<link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet" media="screen">
-<link href='${pageContext.request.contextPath}/css/style.css' rel="stylesheet" media="screen">
-<link href='${pageContext.request.contextPath}/css/bootstrap-responsive.css' rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/bootstrap.css"
+	rel="stylesheet" media="screen">
+<link href='${pageContext.request.contextPath}/css/style.css'
+	rel="stylesheet" media="screen">
+<link
+	href='${pageContext.request.contextPath}/css/bootstrap-responsive.css'
+	rel="stylesheet">
 
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
       <script src="<c:url value="/js/html5shiv.js" />"></script>
     <![endif]-->
-    
-    <decorator:head />
+
+<decorator:head />
 </head>
 
 <body>
@@ -30,24 +35,23 @@
 			<div class="container-fluid">
 
 				<div class="row-fluid">
-				<span class="span2" >
-					<c:choose>
-						<c:when test="${isLogged}" >
-							<div id="user-status">
-								<p>NickName <span id="nickname">&nbsp;</span></p>
-								<p>Energy: <span  id="energy">&nbsp;</span>/ <span  id="max-energy">&nbsp;</span></p>
-								<p>Health:<span id="health">&nbsp;</span> /<span  id="max-health">&nbsp;</span></p>
-								<p>cash:<span  id="cash">&nbsp;</span>
-							</div>
-						</c:when>
-						<c:otherwise>
-							<p class="text-warning">Please login first</p>
-						</c:otherwise>
-					</c:choose>
-				</span>
-				<span class="span7">
-					<decorator:body />
-				</span>
+					<span class="span2"> <c:choose>
+							<c:when test="${isLogged}">
+								<ul class="list-unstyled" id="user-status">
+									<li>NickName <span id="nickname">&nbsp;</span></li>
+									<li>Energy: <span id="energy">&nbsp;</span>/ <span id="max-energy">&nbsp;</span></li>
+									<li>Health:<span id="health">&nbsp;</span> /<span id="max-health">&nbsp;</span></li>
+									<li>cash:<span id="cash">&nbsp;</span></li>
+								</ul>
+							</c:when>
+							<c:otherwise>
+								<p class="text-warning">Please login first</p>
+							</c:otherwise>
+						</c:choose>
+					</span> <span class="span7"> <decorator:body />
+					</span> <span class="span1">
+						<p>Banner</p>
+					</span>
 				</div>
 			</div>
 		</div>
@@ -55,15 +59,16 @@
 	</div>
 	<div id="footer">
 		<div class="container">
-			<p class="muted credit">
-				&copy; Bikewars 2013
-			</p>
+			<p class="muted credit">&copy; Bikewars 2013</p>
 		</div>
 
 	</div>
-	<script type="text/javascript" src='${pageContext.request.contextPath}/js/jquery-1.10.2.min.js'></script>
-	<script type="text/javascript" src='${pageContext.request.contextPath}/js/bootstrap.min.js'></script>
-	<script type="text/javascript" src='${pageContext.request.contextPath}/js/bikewars.js'></script>
+	<script type="text/javascript"
+		src='${pageContext.request.contextPath}/js/jquery-1.10.2.min.js'></script>
+	<script type="text/javascript"
+		src='${pageContext.request.contextPath}/js/bootstrap.min.js'></script>
+	<script type="text/javascript"
+		src='${pageContext.request.contextPath}/js/bikewars.js'></script>
 
 </body>
 
