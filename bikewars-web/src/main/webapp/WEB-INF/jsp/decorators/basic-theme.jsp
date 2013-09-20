@@ -41,7 +41,7 @@
 							</div>
 						</c:when>
 						<c:otherwise>
-							<p>Please login first</p>
+							<p class="text-warning">Please login first</p>
 						</c:otherwise>
 					</c:choose>
 				</span>

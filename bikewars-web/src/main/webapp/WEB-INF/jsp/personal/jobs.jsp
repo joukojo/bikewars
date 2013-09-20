@@ -33,7 +33,7 @@
 				<td><c:out value="${job.energy}" /></td>
 				<td>
 
-					<button class="jobExecute" name="execute" name="job" value="${job.jobId}">Execute</button>
+					<button class="btn btn-success jobExecute" name="execute" name="job" value="${job.jobId}">Execute</button>
 
 				</td>
 			</tr>
