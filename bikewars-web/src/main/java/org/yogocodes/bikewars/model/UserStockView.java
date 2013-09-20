@@ -29,7 +29,7 @@ public class UserStockView {
 		}
 
 		if (stockModel != null) {
-			stockId = stockModel.getStockId();
+			setStockId(stockModel.getStockId());
 			name = stockModel.getName();
 			description = stockModel.getDescription();
 			currentPrice = stockModel.getCurrentPrice();
@@ -70,6 +70,9 @@ public class UserStockView {
 		return userId;
 	}
 
+	public void setUserId(Long userId) {
+		this.userId = userId; 
+	}
 	public Long getCount() {
 		return count;
 	}
@@ -80,6 +83,10 @@ public class UserStockView {
 
 	public Long getPurchasePrice() {
 		return purchasePrice;
+	}
+
+	public void setStockId(Long stockId) {
+		this.stockId = stockId;
 	}
 
 }
