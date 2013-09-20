@@ -22,6 +22,7 @@ public class UserStockView {
 			id = userStock.getId();
 			purchaseDate = userStock.getPurchaseDate();
 			purchasePrice = userStock.getPurchasePrice();
+			userId = userStock.getUserId();
 		} else {
 			count = 0L;
 			id = 0L;
@@ -70,9 +71,6 @@ public class UserStockView {
 		return userId;
 	}
 
-	public void setUserId(Long userId) {
-		this.userId = userId; 
-	}
 	public Long getCount() {
 		return count;
 	}
