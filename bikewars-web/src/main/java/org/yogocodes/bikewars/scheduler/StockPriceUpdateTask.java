@@ -1,7 +1,6 @@
 package org.yogocodes.bikewars.scheduler;
 
 import java.util.List;
-import java.util.Random;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
