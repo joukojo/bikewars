@@ -15,14 +15,9 @@ import org.yogocodes.bikewars.services.StockService;
 @Service("stockPriceUpdateTaskService")
 public class StockPriceUpdateTask {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
-	
-	public StockPriceUpdateTask() {
-		random = new Random(System.currentTimeMillis());
-	}
-	
+
 	@Autowired
 	private StockService stockService;
-	private Random random;
 	@Scheduled(fixedRate = 15000, initialDelay = 6000)
 	public void updateStockPrices() {
 		logger.info("updating stock prices");
