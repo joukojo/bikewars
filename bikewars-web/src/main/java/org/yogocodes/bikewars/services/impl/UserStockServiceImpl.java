@@ -48,6 +48,8 @@ public class UserStockServiceImpl implements UserStockService {
 
 	@Override
 	public void save(final UserStockModel stockByUser) {
+		logger.trace("saving user stock: {}", stockByUser);
+		
 		userStockDao.save(stockByUser);
 
 	}
