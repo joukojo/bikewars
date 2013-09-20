@@ -30,7 +30,7 @@
 			<div class="container-fluid">
 
 				<div class="row-fluid">
-				<span class="span1" >
+				<span class="span2" >
 					<c:choose>
 						<c:when test="${isLogged}" >
 							<div id="user-status">
