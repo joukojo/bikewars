@@ -44,7 +44,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 		List<UserInfoModel> filteredUsers = new ArrayList<>(
 				attackbleUsers.size());
 		for (UserInfoModel userInfoModel : attackbleUsers) {
-			if (userInfoModel.getUserId() == attackerUserId) {
+			if (userInfoModel.getUserId().equals(attackerUserId) ) {
 				continue;
 			}
 			filteredUsers.add(userInfoModel);

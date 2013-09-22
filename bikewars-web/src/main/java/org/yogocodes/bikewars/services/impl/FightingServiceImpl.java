@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.yogocodes.bikewars.dao.FightDao;
 import org.yogocodes.bikewars.model.FightResultModel;
 import org.yogocodes.bikewars.model.UserInfoModel;
 import org.yogocodes.bikewars.services.FightingService;
@@ -21,7 +22,10 @@ public class FightingServiceImpl implements FightingService {
 	private final Random random = new Random(System.currentTimeMillis());
 
 	@Autowired
-	private UserInfoService userInfoService; 
+    protected UserInfoService userInfoService;
+
+    @Autowired
+    protected FightDao fightDao;
 	
 	@Override
 	public FightResultModel fight(Long attackerId, Long defenderId) {
@@ -29,20 +33,25 @@ public class FightingServiceImpl implements FightingService {
 		
 		UserInfoModel attacker = userInfoService.getUserInfo(attackerId);
 		UserInfoModel defender = userInfoService.getUserInfo(defenderId);
-		
+
+        if( logger.isTraceEnabled() ) {
+            logger.trace("attacker: {}", attacker);
+            logger.trace("defender: {}", defender);
+        }
+
 		boolean isAttackSuccess = random.nextBoolean();
-		Long stoledCash;
+		Long stolenCash;
 		if( isAttackSuccess ) {
 			Integer cash = defender.getCash();
-			stoledCash = calculateStoledCash(cash);
-			defender.setCash((int) (defender.getCash() - stoledCash));
-			attacker.setCash((int) (attacker.getCash() + stoledCash));
+			stolenCash = calculateStolenCash(cash);
+			defender.setCash((int) (defender.getCash() - stolenCash));
+			attacker.setCash((int) (attacker.getCash() + stolenCash));
 		}
 		else {
 			Integer cash = attacker.getCash();
-			stoledCash = calculateStoledCash(cash);
-			defender.setCash((int) (defender.getCash() + stoledCash));
-			attacker.setCash((int) (attacker.getCash() - stoledCash));
+			stolenCash = calculateStolenCash(cash);
+			defender.setCash((int) (defender.getCash() + stolenCash));
+			attacker.setCash((int) (attacker.getCash() - stolenCash));
 		}
 		userInfoService.saveUserInfo(attacker);
 		userInfoService.saveUserInfo(defender);
@@ -51,16 +60,16 @@ public class FightingServiceImpl implements FightingService {
 		fightResult.setAttackerId(attackerId);
 		fightResult.setAttackerWon(isAttackSuccess);
 		Date now = new Date();
-		fightResult.setCreated(now );
+		fightResult.setCreated(now);
 		fightResult.setDefenderId(defenderId);
-		fightResult.setMoney(stoledCash);
+		fightResult.setMoney(stolenCash);
 		
-		
+        fightDao.save(fightResult);
 		
 		return fightResult;
 	}
 
-	private long calculateStoledCash(Integer cash) {
+	private long calculateStolenCash(Integer cash) {
 		double percentage = random.nextDouble() * 0.4d;
 		return (long) (cash * percentage);
 	}

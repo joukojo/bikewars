@@ -7,13 +7,15 @@
 <title>User registration</title>
 </head>
 <body>
+      	<div class="page-header">
+      		<h1>
+      			Register <small>Starting the war, you need to register</small>
+      		</h1>
+      	</div>
+
 		<form:form commandName="userModel" cssClass="form-horizontal">
 		<form:hidden path="userId" />
 		<fieldset>
-
-			<!-- Form Name -->
-			<legend>Register</legend>
-
 			<!-- Text input-->
 			<div class="control-group">
 				<label class="control-label">email address</label>
@@ -36,7 +38,6 @@
 			<div class="control-group">
 				<label class="control-label">Confirm password</label>
 				<div class="controls">
-					
 					<input id="passwordinput" name="confirmedPassword" placeholder="confirm password" class="input-xlarge" required="required" type="password" />
 					<p class="help-block">confirm your password</p>
 				</div>

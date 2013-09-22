@@ -23,7 +23,7 @@ public class JobServiceImplTest {
 	@Test
 	public void testGetAllJobs() throws Exception {
 
-		final List<JobModel> jobs = new ArrayList<JobModel>();
+		final List<JobModel> jobs = new ArrayList<>();
 		Mockito.when(jobDao.getJobs()).thenReturn(jobs);
 
 		final List<JobModel> actualJobs = jobServiceImpl.getAllJobs(0, 100);

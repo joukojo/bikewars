@@ -40,7 +40,7 @@ public class JobController {
 	public JobModel viewJob(@PathVariable final Long jobId) {
 		log.trace("viewing job #{}", jobId);
 		final JobModel job = getJobService().getJobById(jobId);
-
+        log.trace("viewing job #{} - {}", jobId, job);
 		return job;
 	}
 
