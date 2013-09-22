@@ -15,6 +15,7 @@
 		</h1>
 	</div>
 
+	<div id="fightResult">&nbsp;</div>
 
 	<table
 		class="table   table-condensed table-hover">
