@@ -48,7 +48,10 @@ public class UserInfoJdbcDaoImpl implements UserInfoDao {
 	@Override
 	public List<UserInfoModel> getAttackbleUsers(int page, int pageSize) {
 
-		List<UserInfoModel> users = jdbcTemplate.query("select * from user_profile where health > 0.4 * max_health", new UserInfoRowMapper());
+		int start= page*pageSize; 
+		
+		Object args[] = {start, pageSize};
+		List<UserInfoModel> users = jdbcTemplate.query("select * from user_profile where health > 0.4 * max_health limit ?,?", args,  new UserInfoRowMapper());
 		
 		return users;
 	}

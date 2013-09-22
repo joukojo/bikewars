@@ -11,14 +11,14 @@
 		<a class="brand" href='<c:url value="/index.htm" />'>BikeWars</a>
 		<div class="nav-collapse collapse">
 			<ul class="nav">
-				<li class="active"><a href='<c:url value="/index.htm" />'>Home</a></li>
+				<li id="home"><a href='<c:url value="/index.htm" />'>Home</a></li>
 				<c:choose>
 					<c:when test="${isLogged}">
-						<li><a href='${pageContext.request.contextPath}/personal/ownpage.htm'>Ownpage</a></li>
-						<li><a href='${pageContext.request.contextPath}/personal/stocks.htm' >Stocks</a></li>
-						<li><a href='${pageContext.request.contextPath}/personal/jobs.htm' >Jobs</a></li>
-						<li><a href='${pageContext.request.contextPath}/personal/cities.htm'>Cities</a></li>
-						<li><a href='${pageContext.request.contextPath}/personal/fights.htm'>Fight!</a></li>
+						<li id="ownpage"><a href='${pageContext.request.contextPath}/personal/ownpage.htm'>Ownpage</a></li>
+						<li id="stocks"><a href='${pageContext.request.contextPath}/personal/stocks.htm' >Stocks</a></li>
+						<li id="jobs"><a href='${pageContext.request.contextPath}/personal/jobs.htm' >Jobs</a></li>
+						<li id="cities"><a href='${pageContext.request.contextPath}/personal/cities.htm'>Cities</a></li>
+						<li id="fight"><a href='${pageContext.request.contextPath}/personal/fights.htm'>Fight!</a></li>
 					</c:when>
 					<c:otherwise>
 						<li><a href='${pageContext.request.contextPath}/register.htm'>Register</a></li>

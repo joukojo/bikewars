@@ -33,7 +33,7 @@ public class FightController {
 	@RequestMapping(value="/personal/fights", method=RequestMethod.GET)
 	public String view(Model model) {
 		logger.trace("viewing fights");
-		int page = 0, pageSize = 100;
+		int page = 0, pageSize = 5;
 		List<UserInfoModel> users = userInfoService.getAttackbleUsers(page, pageSize);
 		Collections.shuffle(users);
 		model.addAttribute("users", users);
