@@ -6,11 +6,11 @@ import org.yogocodes.bikewars.model.UserModel;
 
 public class UserModelUtil {
 
-	public static final UserModel createUser() {
+	public static UserModel createUser() {
 		return createUser(System.currentTimeMillis());
 	}
 
-	public static final UserModel createUser(final Long userId) {
+	public static UserModel createUser(final Long userId) {
 		final UserModel userModel = new UserModel();
 		userModel.setEmail("junit" + userId + "@junittest.com");
 		final Date now = new Date();
