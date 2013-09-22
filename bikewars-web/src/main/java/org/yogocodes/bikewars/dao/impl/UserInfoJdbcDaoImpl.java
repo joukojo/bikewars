@@ -45,4 +45,12 @@ public class UserInfoJdbcDaoImpl implements UserInfoDao {
 		jdbcTemplate.update("update user_profile set created = ?, energy_inc = ?, energy = ?, cash=? where id = ?", params);
 	}
 
+	@Override
+	public List<UserInfoModel> getAttackbleUsers(int page, int pageSize) {
+
+		List<UserInfoModel> users = jdbcTemplate.query("select * from user_profile where health > 0.4 * max_health", new UserInfoRowMapper());
+		
+		return users;
+	}
+
 }

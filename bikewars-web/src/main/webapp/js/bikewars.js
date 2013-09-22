@@ -68,12 +68,35 @@ $(document).ready(function() {
 						console.log(data);
 					    location.reload();
 					});
-					
-					
 			});
-			
 		} );
 		
+	}
+	
+	if( $('.fightEvent').length != 0) {
+		$('.fightEvent').each( function(button) {
+			$(this).click( function() {
+			console.log('fight event');
+			var userId = $(this).attr('value');
+			var url = '/bikewars/json/personal/fights/' + userId + ".json";
+			console.log(url);
+			$.post(url, function(data) {
+				console.log(data);
+				var status = data['attackerWon'];
+				var money = data['money']
+				if( status ) {
+					console.log("attack success");
+					$('#fightResult').html('You won ' + money);
+				}
+				else {
+					console.log("attack failed");
+					$('#fightResult').html('You lost ' + money);
+				}
+				
+				updateCurrentUserInfo(1);
+			});
+			});
+		});
 	}
 
 });

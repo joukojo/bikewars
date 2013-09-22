@@ -1,5 +1,7 @@
 package org.yogocodes.bikewars.services.impl;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +31,13 @@ public class UserInfoServiceImpl implements UserInfoService {
 	public void saveUserInfo(final UserInfoModel userInfo) {
 		userInfoDao.save(userInfo);
 
+	}
+
+	@Override
+	public List<UserInfoModel> getAttackbleUsers(int page, int pageSize) {
+		
+		
+		
+		return userInfoDao.getAttackbleUsers(page, pageSize);
 	}
 }
