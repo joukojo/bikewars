@@ -1,3 +1,4 @@
+drop table if exists user_fights;
 drop table if exists user_stocks; 
 drop table if exists stocks;
 drop table if exists user_profile; 
@@ -69,5 +70,18 @@ modified timestamp,
 primary key(id)
 ) ENGINE =InnoDB;
 
+create table user_fights(
+id integer not null auto_increment,
+attacker_id integer,
+defender_id integer,
+attacker_won boolean,
+money integer,
+health integer,
+created timestamp,
+primary key(id),
+foreign key(attacker_id) references users(id) on delete cascade,
+foreign key(defender_id) references users(id) on delete cascade
+) ENGINE = InnoDB;
 
-
+create index attacker_inx on  user_fights(attacker_id);
+create index defender_inx on  user_fights(defender_id);
