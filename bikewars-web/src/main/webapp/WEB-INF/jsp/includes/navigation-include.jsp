@@ -18,7 +18,7 @@
 						<li><a href='${pageContext.request.contextPath}/personal/stocks.htm' >Stocks</a></li>
 						<li><a href='${pageContext.request.contextPath}/personal/jobs.htm' >Jobs</a></li>
 						<li><a href='${pageContext.request.contextPath}/personal/cities.htm'>Cities</a></li>
-						<li><a href='${pageContext.request.contextPath}/personal/fight.htm'>Fight!</a></li>
+						<li><a href='${pageContext.request.contextPath}/personal/fights.htm'>Fight!</a></li>
 					</c:when>
 					<c:otherwise>
 						<li><a href='${pageContext.request.contextPath}/register.htm'>Register</a></li>
