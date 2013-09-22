@@ -51,7 +51,7 @@ public class UserInfoJdbcDaoImpl implements UserInfoDao {
 		int start= page*pageSize; 
 		
 		Object args[] = {start, pageSize};
-		List<UserInfoModel> users = jdbcTemplate.query("select * from user_profile where health > 0.4 * max_health limit ?,?", args,  new UserInfoRowMapper());
+		List<UserInfoModel> users = jdbcTemplate.query("select * from user_profile where health > 0.4 * max_health order by cash desc  limit ?,?", args,  new UserInfoRowMapper());
 		
 		return users;
 	}

@@ -1,5 +1,6 @@
 package org.yogocodes.bikewars.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -13,7 +14,8 @@ import org.yogocodes.bikewars.services.UserInfoService;
 @Service("userInfoService")
 public class UserInfoServiceImpl implements UserInfoService {
 
-	private final Logger log = LoggerFactory.getLogger(UserInfoServiceImpl.class);
+	private final Logger log = LoggerFactory
+			.getLogger(UserInfoServiceImpl.class);
 
 	@Autowired
 	private UserInfoDao userInfoDao;
@@ -34,10 +36,20 @@ public class UserInfoServiceImpl implements UserInfoService {
 	}
 
 	@Override
-	public List<UserInfoModel> getAttackbleUsers(int page, int pageSize) {
-		
-		
-		
-		return userInfoDao.getAttackbleUsers(page, pageSize);
+	public List<UserInfoModel> getAttackbleUsers(Long attackerUserId, int page,
+			int pageSize) {
+
+		List<UserInfoModel> attackbleUsers = userInfoDao.getAttackbleUsers(
+				page, pageSize);
+		List<UserInfoModel> filteredUsers = new ArrayList<>(
+				attackbleUsers.size());
+		for (UserInfoModel userInfoModel : attackbleUsers) {
+			if (userInfoModel.getUserId() == attackerUserId) {
+				continue;
+			}
+			filteredUsers.add(userInfoModel);
+		}
+
+		return filteredUsers;
 	}
 }

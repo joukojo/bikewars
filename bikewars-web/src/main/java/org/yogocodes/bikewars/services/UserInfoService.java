@@ -10,6 +10,9 @@ public interface UserInfoService {
 
 	void saveUserInfo(UserInfoModel userInfo);
 
-	List<UserInfoModel> getAttackbleUsers(int page, int pageSize);
+
+
+	List<UserInfoModel> getAttackbleUsers(Long attackerUserId, int page,
+			int pageSize);
 
 }

@@ -31,10 +31,13 @@ public class FightController {
 	private FightingService fightingService;
 	
 	@RequestMapping(value="/personal/fights", method=RequestMethod.GET)
-	public String view(Model model) {
+	public String view(HttpSession session, Model model) {
 		logger.trace("viewing fights");
+		Long userId = UserSessionUtil.getUserId(session);
+		
 		int page = 0, pageSize = 5;
-		List<UserInfoModel> users = userInfoService.getAttackbleUsers(page, pageSize);
+		List<UserInfoModel> users = userInfoService.getAttackbleUsers(userId,page, pageSize);
+		
 		Collections.shuffle(users);
 		model.addAttribute("users", users);
 		return "personal/fights";
