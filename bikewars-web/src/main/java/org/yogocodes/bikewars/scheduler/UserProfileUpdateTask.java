@@ -1,5 +1,7 @@
 package org.yogocodes.bikewars.scheduler;
 
+import org.perf4j.LoggingStopWatch;
+import org.perf4j.StopWatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +29,10 @@ public class UserProfileUpdateTask {
 	public void updateEnergies() {
 		log.info("updating user energies");
 		final String sql = "update user_profile set energy = if( energy + energy_inc < max_energy, energy+energy_inc, max_energy ), modified=now() where energy < max_energy";
+                   StopWatch stopWatch = new LoggingStopWatch();
+		int rows = jdbcTemplate.update(sql);
 
-		jdbcTemplate.update(sql);
-
+        stopWatch.stop("update user profiles", "updated " + rows + " users");
 		log.info("updated user energies");
 
 	}
@@ -38,9 +41,9 @@ public class UserProfileUpdateTask {
 	public void updateHealth() {
 		log.info("updating user health");
 		final String sql = "update user_profile set health = if( health + health_inc < max_health, health + health_inc, max_health ), modified=now()  where health < max_health";
-
-		jdbcTemplate.update(sql);
-
+        StopWatch stopWatch = new LoggingStopWatch();
+		int rows = jdbcTemplate.update(sql);
+        stopWatch.stop("update user profiles for health", "processed " + rows + " users");
 		log.info("updated user healths");
 
 	}

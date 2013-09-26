@@ -2,6 +2,8 @@ package org.yogocodes.bikewars.scheduler;
 
 import java.util.List;
 
+import org.perf4j.StopWatch;
+import org.perf4j.LoggingStopWatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +22,10 @@ public class StockPriceUpdateTask {
 	@Scheduled(fixedRate = 15000, initialDelay = 6000)
 	public void updateStockPrices() {
 		logger.info("updating stock prices");
-		
+        StopWatch stopWatch = new LoggingStopWatch();
 		List<StockModel> allStocks = getStockService().getStocks();
-		
-		
+
+
 		for (StockModel stock : allStocks) {
 			long delta = System.currentTimeMillis();  
 			
@@ -36,7 +38,7 @@ public class StockPriceUpdateTask {
 			stock.setCurrentPrice(newPrice);
 			stockService.save(stock);
 		}
-		
+        stopWatch.stop("stockpriceupdatetask", "updated stock price");
 		logger.info("updated stock prices");
 	}
 	public StockService getStockService() {

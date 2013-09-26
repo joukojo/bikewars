@@ -2,6 +2,7 @@ package org.yogocodes.bikewars.dao.impl;
 
 import java.util.List;
 
+import org.perf4j.LoggingStopWatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,11 +49,13 @@ public class UserInfoJdbcDaoImpl implements UserInfoDao {
 	@Override
 	public List<UserInfoModel> getAttackbleUsers(int page, int pageSize) {
 
+        LoggingStopWatch stopWatch = new LoggingStopWatch();
 		int start= page*pageSize; 
 		
 		Object args[] = {start, pageSize};
 		List<UserInfoModel> users = jdbcTemplate.query("select * from user_profile where health > 0.4 * max_health order by cash desc  limit ?,?", args,  new UserInfoRowMapper());
-		
+
+        stopWatch.stop("got attackable user");
 		return users;
 	}
 

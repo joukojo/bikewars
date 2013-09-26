@@ -8,6 +8,9 @@ import org.springframework.stereotype.Repository;
 import org.yogocodes.bikewars.dao.FightDao;
 import org.yogocodes.bikewars.model.FightResultModel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: joukojo
@@ -18,15 +21,14 @@ import org.yogocodes.bikewars.model.FightResultModel;
 @Repository("fightDao")
 public class FightJdbcDaoImpl implements FightDao {
 
-    private  final Logger logger = LoggerFactory.getLogger(FightJdbcDaoImpl.class);
-
+    private final Logger logger = LoggerFactory.getLogger(FightJdbcDaoImpl.class);
     @Autowired
     protected JdbcTemplate jdbcTemplate;
 
     @Override
     public void save(FightResultModel fightResult) {
         logger.trace("saving fight: {}", fightResult);
-        if( fightResult.getFight() == null ) {
+        if (fightResult.getFight() == null) {
             insert(fightResult);
         }
 
@@ -40,6 +42,16 @@ public class FightJdbcDaoImpl implements FightDao {
         jdbcTemplate.update(sql, params);
     }
 
+    @Override
+    public List<FightResultModel> getLatestFights(Long userId, int pageNum, int pageSize) {
 
+        List<FightResultModel> fights = new ArrayList<>(pageSize);
+        String sql = "select * from user_fights where attacker_id = ? or defender_id =? order by created desc limit ?,?";
+        Object params[] = {userId, userId, pageNum * pageSize, pageSize};
+        fights = jdbcTemplate.query(sql, params, new FightResultRowMapper());
+
+        return fights;
+    }
 
 }
+

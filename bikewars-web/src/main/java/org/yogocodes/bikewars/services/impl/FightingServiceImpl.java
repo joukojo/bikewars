@@ -1,8 +1,5 @@
 package org.yogocodes.bikewars.services.impl;
 
-import java.util.Date;
-import java.util.Random;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,73 +10,78 @@ import org.yogocodes.bikewars.model.UserInfoModel;
 import org.yogocodes.bikewars.services.FightingService;
 import org.yogocodes.bikewars.services.UserInfoService;
 
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
+
 @Service("fightingService")
 public class FightingServiceImpl implements FightingService {
 
-	private final Logger logger = LoggerFactory
-			.getLogger(FightingServiceImpl.class);
-
-	private final Random random = new Random(System.currentTimeMillis());
-
-	@Autowired
+    private final Logger logger = LoggerFactory.getLogger(FightingServiceImpl.class);
+    private final Random random = new Random(System.currentTimeMillis());
+    @Autowired
     protected UserInfoService userInfoService;
-
     @Autowired
     protected FightDao fightDao;
-	
-	@Override
-	public FightResultModel fight(Long attackerId, Long defenderId) {
 
-		
-		UserInfoModel attacker = userInfoService.getUserInfo(attackerId);
-		UserInfoModel defender = userInfoService.getUserInfo(defenderId);
+    @Override
+    public FightResultModel fight(Long attackerId, Long defenderId) {
 
-        if( logger.isTraceEnabled() ) {
+
+        UserInfoModel attacker = userInfoService.getUserInfo(attackerId);
+        UserInfoModel defender = userInfoService.getUserInfo(defenderId);
+
+        if (logger.isTraceEnabled()) {
             logger.trace("attacker: {}", attacker);
             logger.trace("defender: {}", defender);
         }
 
-		boolean isAttackSuccess = random.nextBoolean();
-		Long stolenCash;
-		if( isAttackSuccess ) {
-			Integer cash = defender.getCash();
-			stolenCash = calculateStolenCash(cash);
-			defender.setCash((int) (defender.getCash() - stolenCash));
-			attacker.setCash((int) (attacker.getCash() + stolenCash));
-		}
-		else {
-			Integer cash = attacker.getCash();
-			stolenCash = calculateStolenCash(cash);
-			defender.setCash((int) (defender.getCash() + stolenCash));
-			attacker.setCash((int) (attacker.getCash() - stolenCash));
-		}
-		userInfoService.saveUserInfo(attacker);
-		userInfoService.saveUserInfo(defender);
-		
-		FightResultModel fightResult = new FightResultModel();
-		fightResult.setAttackerId(attackerId);
-		fightResult.setAttackerWon(isAttackSuccess);
-		Date now = new Date();
-		fightResult.setCreated(now);
-		fightResult.setDefenderId(defenderId);
-		fightResult.setMoney(stolenCash);
-		
+        boolean isAttackSuccess = random.nextBoolean();
+        Long stolenCash;
+        if (isAttackSuccess) {
+            Integer cash = defender.getCash();
+            stolenCash = calculateStolenCash(cash);
+            defender.setCash((int) (defender.getCash() - stolenCash));
+            attacker.setCash((int) (attacker.getCash() + stolenCash));
+        } else {
+            Integer cash = attacker.getCash();
+            stolenCash = calculateStolenCash(cash);
+            defender.setCash((int) (defender.getCash() + stolenCash));
+            attacker.setCash((int) (attacker.getCash() - stolenCash));
+        }
+        userInfoService.saveUserInfo(attacker);
+        userInfoService.saveUserInfo(defender);
+
+        FightResultModel fightResult = new FightResultModel();
+        fightResult.setAttackerId(attackerId);
+        fightResult.setAttackerWon(isAttackSuccess);
+        Date now = new Date();
+        fightResult.setCreated(now);
+        fightResult.setDefenderId(defenderId);
+        fightResult.setMoney(stolenCash);
+
         fightDao.save(fightResult);
-		
-		return fightResult;
-	}
 
-	private long calculateStolenCash(Integer cash) {
-		double percentage = random.nextDouble() * 0.4d;
-		return (long) (cash * percentage);
-	}
+        return fightResult;
+    }
 
-	public UserInfoService getUserInfoService() {
-		return userInfoService;
-	}
+    private long calculateStolenCash(Integer cash) {
+        double percentage = random.nextDouble() * 0.4d;
+        return (long) (cash * percentage);
+    }
 
-	public void setUserInfoService(UserInfoService userInfoService) {
-		this.userInfoService = userInfoService;
-	}
+    public UserInfoService getUserInfoService() {
+        return userInfoService;
+    }
 
+    public void setUserInfoService(UserInfoService userInfoService) {
+        this.userInfoService = userInfoService;
+    }
+
+    @Override
+    public List<FightResultModel> getRecentFights(Long userId, Integer pageNum, Integer pageSize) {
+        logger.trace("getting recent fights for {} - {} / {}", userId, pageNum, pageSize);
+        List<FightResultModel> recentFights = fightDao.getLatestFights(userId, pageNum, pageSize);
+        return recentFights;
+    }
 }

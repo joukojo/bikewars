@@ -21,6 +21,24 @@
 
 	</appender>
 
+    <!-- Perf4J appenders -->
+    <!--
+       This AsyncCoalescingStatisticsAppender groups StopWatch log messages
+       into GroupedTimingStatistics messages which it sends on the
+       file appender defined below
+    -->
+    <appender name="CoalescingStatistics"
+              class="org.perf4j.log4j.AsyncCoalescingStatisticsAppender">
+        <!--
+          The TimeSlice option is used to determine the time window for which
+          all received StopWatch logs are aggregated to create a single
+          GroupedTimingStatistics log. Here we set it to 10 seconds, overriding
+          the default of 30000 ms
+        -->
+        <param name="TimeSlice" value="10000"/>
+        <appender-ref ref="fileAppender"/>
+    </appender>
+
 	<logger name="org.yogocodes">
 		<level value="info" />
 	</logger>
@@ -30,8 +48,21 @@
 	</logger>
 
 	<logger name="org.springframework">
-		<level value="debug" />
+		<level value="warn" />
 	</logger>
+
+    <!--
+   The Perf4J logger. Note that org.perf4j.TimingLogger is the value of the
+   org.perf4j.StopWatch.DEFAULT_LOGGER_NAME constant. Also, note that
+   additivity is set to false, which is usually what is desired - this means
+   that timing statements will only be sent to this logger and NOT to
+   upstream loggers.
+ -->
+    <logger name="org.perf4j.TimingLogger" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="CoalescingStatistics"/>
+    </logger>
+
 
 	<root>
 		<level value="info" />

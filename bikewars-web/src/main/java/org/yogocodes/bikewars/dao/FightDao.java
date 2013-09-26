@@ -2,6 +2,8 @@ package org.yogocodes.bikewars.dao;
 
 import org.yogocodes.bikewars.model.FightResultModel;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: joukojo
@@ -11,4 +13,6 @@ import org.yogocodes.bikewars.model.FightResultModel;
  */
 public interface FightDao {
     void save(FightResultModel fightResult);
+
+    List<FightResultModel> getLatestFights(Long userId, int pageNum, int pageSize);
 }

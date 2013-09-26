@@ -23,7 +23,9 @@
 		</div>
 		<div class="span5">
 			<h2>Fights</h2>
-
+			<c:forEach items="${fights}" var="fight" >
+                <c:out value="${fight}" />
+			</c:forEach>
 		</div>
 
 	</div>
