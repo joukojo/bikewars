@@ -19,14 +19,14 @@ public class FightResultRowMapper implements RowMapper<FightResultModel> {
     public FightResultModel mapRow(ResultSet resultSet, int i) throws SQLException {
         FightResultModel fightResultModel = new FightResultModel();
 
-        Integer id = resultSet.getInt("id");
+        Long id = resultSet.getLong("id");
         Long attackerId = resultSet.getLong("attacker_id");
         Long defenderId = resultSet.getLong("defender_id");
         Boolean attackerWon = resultSet.getBoolean("attacker_won");
         Long money = resultSet.getLong("money");
         // Integer health = resultSet.getInt("health");
         Date created = resultSet.getDate("created");
-
+        fightResultModel.setFight(id);
         fightResultModel.setAttackerId(attackerId);
         fightResultModel.setAttackerWon(attackerWon);
         fightResultModel.setCreated(created);

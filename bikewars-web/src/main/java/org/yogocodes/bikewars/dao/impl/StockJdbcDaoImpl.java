@@ -73,6 +73,7 @@ public class StockJdbcDaoImpl implements StockDao {
         Object args[] = {stock.getCurrentPrice(), now, stock.getStockId()};
 
         int rows = jdbcTemplate.update(sql, args);
+        log.debug("updated single row: {}", rows);
         stopWatch.stop("stockDao", "updated stock");
 
     }
