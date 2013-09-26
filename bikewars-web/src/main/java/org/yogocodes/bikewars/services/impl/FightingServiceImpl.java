@@ -36,7 +36,19 @@ public class FightingServiceImpl implements FightingService {
             logger.trace("defender: {}", defender);
         }
 
-        boolean isAttackSuccess = random.nextBoolean();
+        FightResultModel fightResult = fight(attacker,defender);
+
+        userInfoService.saveUserInfo(attacker);
+        userInfoService.saveUserInfo(defender);
+        fightDao.save(fightResult);
+
+        return fightResult;
+    }
+
+	private FightResultModel fight(UserInfoModel attacker, UserInfoModel defender) {
+		boolean isAttackSuccess = random.nextBoolean();
+		Long attackerId = attacker.getUserId();
+		Long defenderId = defender.getUserId();
         Long stolenCash;
         if (isAttackSuccess) {
             Integer cash = defender.getCash();
@@ -49,8 +61,6 @@ public class FightingServiceImpl implements FightingService {
             defender.setCash((int) (defender.getCash() + stolenCash));
             attacker.setCash((int) (attacker.getCash() - stolenCash));
         }
-        userInfoService.saveUserInfo(attacker);
-        userInfoService.saveUserInfo(defender);
 
         FightResultModel fightResult = new FightResultModel();
         fightResult.setAttackerId(attackerId);
@@ -59,11 +69,8 @@ public class FightingServiceImpl implements FightingService {
         fightResult.setCreated(now);
         fightResult.setDefenderId(defenderId);
         fightResult.setMoney(stolenCash);
-
-        fightDao.save(fightResult);
-
-        return fightResult;
-    }
+		return fightResult;
+	}
 
     private long calculateStolenCash(Integer cash) {
         double percentage = random.nextDouble() * 0.4d;
