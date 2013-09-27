@@ -18,26 +18,39 @@
 
 	<div class="row">
 		<div class="span5">
-			<h2>Inventory</h2>
+			<h2>Stocks</h2>
+
+
 
 		</div>
 		<div class="span5">
 			<h2>Fights</h2>
-			<c:forEach items="${fights}" var="fight" >
-                <c:out value="${fight}" />
-			</c:forEach>
+			<ul>
+				<c:forEach items="${fights}" var="fight">
+					<c:choose>
+						<c:when test="${fight.attackerWon}">
+							<li>you won <c:out value="${fight.money }" />
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li>you won <c:out value="${fight.money }" />
+							</li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+			</ul>
 		</div>
 
 	</div>
 	<div class="row">
 		<div class="span5">
-		<h2>Shop</h2>
-		
+			<h2>Shop</h2>
+
 		</div>
 		<div class="span5">
-		<h2>Rankings</h2>	
+			<h2>Rankings</h2>
 		</div>
-		
+
 
 	</div>
 
