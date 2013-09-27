@@ -55,8 +55,17 @@ public class UserInfoJdbcDaoImpl implements UserInfoDao {
 		Object args[] = {start, pageSize};
 		List<UserInfoModel> users = jdbcTemplate.query("select * from user_profile where health > 0.4 * max_health order by cash desc  limit ?,?", args,  new UserInfoRowMapper());
 
-        stopWatch.stop("got attackable user");
+        stopWatch.stop("UserInfoJdbcDao", "got attackable users");
 		return users;
 	}
 
+	
+	@Override
+	public List<UserInfoModel> getHighestUsers(){
+		String sql = "select * from user_profile order by cash desc";
+		
+		List<UserInfoModel> highestusers = jdbcTemplate.query(sql, new UserInfoRowMapper());
+		
+		return highestusers;
+	}
 }

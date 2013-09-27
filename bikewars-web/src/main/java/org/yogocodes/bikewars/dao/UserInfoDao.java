@@ -12,4 +12,6 @@ public interface UserInfoDao {
 
 	List<UserInfoModel> getAttackbleUsers(int page, int pageSize);
 
+	List<UserInfoModel> getHighestUsers();
+
 }
