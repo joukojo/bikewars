@@ -2,6 +2,7 @@ package org.yogocodes.bikewars.web.personal;
 
 import javax.servlet.http.HttpSession;
 
+import org.perf4j.StopWatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +25,15 @@ public class OwnPageController {
     protected FightingService fightingService;
 	@RequestMapping(value = "/personal/ownpage", method = RequestMethod.GET)
 	public String view(final HttpSession session, final Model model) {
+		StopWatch stopWatch = new StopWatch("ownpagecontroller");
+		
 		final Long userId = UserSessionUtil.getUserId(session);
+		
         List<FightResultModel> recentFights = fightingService.getRecentFights(userId, 0, 5);
+        stopWatch.lap("ownpagecontroller", "got recent fights");
         model.addAttribute("fights", recentFights);
 		log.trace("entering ownpage for user:{}", userId);
+		stopWatch.stop();
 		return "personal/ownpage";
 	}
 }
