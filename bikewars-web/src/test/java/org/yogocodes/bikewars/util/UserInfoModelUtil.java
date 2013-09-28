@@ -10,6 +10,7 @@ public class UserInfoModelUtil {
 	public static  UserInfoModel createUserInfo(Long userId) {
 		final UserInfoModel userInfo = new UserInfoModel(); 
 		userInfo.setUserId(userId);
+		userInfo.setCash(1000);
 		return userInfo;
 	}
 	
