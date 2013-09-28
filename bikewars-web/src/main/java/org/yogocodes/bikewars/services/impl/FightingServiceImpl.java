@@ -22,7 +22,7 @@ public class FightingServiceImpl implements FightingService {
     @Autowired
     protected UserInfoService userInfoService;
     @Autowired
-    protected FightDao fightDao;
+	private FightDao fightDao;
 
     @Override
     public FightResultModel fight(Long attackerId, Long defenderId) {
@@ -38,30 +38,40 @@ public class FightingServiceImpl implements FightingService {
 
         FightResultModel fightResult = fight(attacker,defender);
 
-        userInfoService.saveUserInfo(attacker);
-        userInfoService.saveUserInfo(defender);
-        fightDao.save(fightResult);
 
         return fightResult;
     }
 
-	private FightResultModel fight(UserInfoModel attacker, UserInfoModel defender) {
-		boolean isAttackSuccess = random.nextBoolean();
-		Long attackerId = attacker.getUserId();
-		Long defenderId = defender.getUserId();
+	protected  FightResultModel fight(UserInfoModel attacker, UserInfoModel defender) {
+		boolean isAttackSuccess = calculateFightResult();
         Long stolenCash;
         if (isAttackSuccess) {
-            Integer cash = defender.getCash();
-            stolenCash = calculateStolenCash(cash);
-            defender.setCash((int) (defender.getCash() - stolenCash));
-            attacker.setCash((int) (attacker.getCash() + stolenCash));
+            stolenCash = executeFight(attacker, defender);
         } else {
-            Integer cash = attacker.getCash();
-            stolenCash = calculateStolenCash(cash);
-            defender.setCash((int) (defender.getCash() + stolenCash));
-            attacker.setCash((int) (attacker.getCash() - stolenCash));
+        	stolenCash = executeFight(defender, attacker);
         }
+        
+		FightResultModel fightResult = createFightResult(attacker, defender, isAttackSuccess, stolenCash);
+        
+        userInfoService.saveUserInfo(attacker);
+        userInfoService.saveUserInfo(defender);
+        getFightDao().save(fightResult);
 
+        
+		return fightResult;
+	}
+
+	protected  Long executeFight(UserInfoModel winner, UserInfoModel loser) {
+		Integer cash = loser.getCash();
+		Long stolenCash = calculateStolenCash(cash);
+		loser.setCash((int) (loser.getCash() - stolenCash));
+		winner.setCash((int) (winner.getCash() + stolenCash));
+		return stolenCash;
+	}
+
+	protected  FightResultModel createFightResult(UserInfoModel attacker, UserInfoModel defender, boolean isAttackSuccess, Long stolenCash) {
+		Long attackerId = attacker.getUserId();
+		Long defenderId = defender.getUserId();
         FightResultModel fightResult = new FightResultModel();
         fightResult.setAttackerId(attackerId);
         fightResult.setAttackerWon(isAttackSuccess);
@@ -70,6 +80,10 @@ public class FightingServiceImpl implements FightingService {
         fightResult.setDefenderId(defenderId);
         fightResult.setMoney(stolenCash);
 		return fightResult;
+	}
+
+	protected  boolean calculateFightResult() {
+		return random.nextBoolean();
 	}
 
     private long calculateStolenCash(Integer cash) {
@@ -88,7 +102,15 @@ public class FightingServiceImpl implements FightingService {
     @Override
     public List<FightResultModel> getRecentFights(Long userId, Integer pageNum, Integer pageSize) {
         logger.trace("getting recent fights for {} - {} / {}", userId, pageNum, pageSize);
-        List<FightResultModel> recentFights = fightDao.getLatestFights(userId, pageNum, pageSize);
+        List<FightResultModel> recentFights = getFightDao().getLatestFights(userId, pageNum, pageSize);
         return recentFights;
     }
+
+	public FightDao getFightDao() {
+		return fightDao;
+	}
+
+	public void setFightDao(FightDao fightDao) {
+		this.fightDao = fightDao;
+	}
 }
