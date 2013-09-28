@@ -98,5 +98,9 @@ $(document).ready(
             });
             $('li#fight').addClass('active');
         }
+        
+        if( $('div#ownpage').length != 0 ) {
+        	$('li#ownpage').addClass('active');
+        }
 
     });
