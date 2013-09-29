@@ -15,4 +15,6 @@ public interface UserInfoService {
 	List<UserInfoModel> getAttackbleUsers(Long attackerUserId, int page,
 			int pageSize);
 
+	List<UserInfoModel> getHighestUsers();
+
 }

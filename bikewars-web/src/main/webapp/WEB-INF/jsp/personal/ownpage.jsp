@@ -33,12 +33,14 @@
 							</li>
 						</c:when>
 						<c:otherwise>
-							<li>you won <c:out value="${fight.money }" />
+							<li>you lost <c:out value="${fight.money }" />
 							</li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
 			</ul>
+			<a href="${pageContext.request.contextPath}/personal/fights.htm">Go
+				to fights page</a>
 		</div>
 
 	</div>
@@ -49,6 +51,13 @@
 		</div>
 		<div class="span5">
 			<h2>Rankings</h2>
+
+			<ul>
+				<c:forEach items="${users}" var="user">
+					<li><c:out value="${user.nickName}" /></li>
+
+				</c:forEach>
+			</ul>
 		</div>
 
 

@@ -11,7 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.yogocodes.bikewars.model.FightResultModel;
+import org.yogocodes.bikewars.model.UserInfoModel;
 import org.yogocodes.bikewars.services.FightingService;
+import org.yogocodes.bikewars.services.UserInfoService;
 import org.yogocodes.bikewars.util.UserSessionUtil;
 
 import java.util.List;
@@ -23,6 +25,10 @@ public class OwnPageController {
 
     @Autowired
     protected FightingService fightingService;
+    
+    @Autowired
+	private UserInfoService userInfoService;
+    
 	@RequestMapping(value = "/personal/ownpage", method = RequestMethod.GET)
 	public String view(final HttpSession session, final Model model) {
 		StopWatch stopWatch = new StopWatch("ownpagecontroller");
@@ -31,9 +37,22 @@ public class OwnPageController {
 		
         List<FightResultModel> recentFights = fightingService.getRecentFights(userId, 0, 5);
         stopWatch.lap("ownpagecontroller", "got recent fights");
+
+        List<UserInfoModel> highestUsers = userInfoService.getHighestUsers();
+        
         model.addAttribute("fights", recentFights);
+        model.addAttribute("users", highestUsers);
+        
 		log.trace("entering ownpage for user:{}", userId);
 		stopWatch.stop();
 		return "personal/ownpage";
+	}
+
+	public UserInfoService getUserInfoService() {
+		return userInfoService;
+	}
+
+	public void setUserInfoService(UserInfoService userInfoService) {
+		this.userInfoService = userInfoService;
 	}
 }

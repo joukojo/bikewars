@@ -62,7 +62,7 @@ public class UserInfoJdbcDaoImpl implements UserInfoDao {
 	
 	@Override
 	public List<UserInfoModel> getHighestUsers(){
-		String sql = "select * from user_profile order by cash desc";
+		String sql = "select * from user_profile order by cash desc limit 5";
 		
 		List<UserInfoModel> highestusers = jdbcTemplate.query(sql, new UserInfoRowMapper());
 		

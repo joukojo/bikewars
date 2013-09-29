@@ -55,4 +55,10 @@ public class UserInfoServiceImpl implements UserInfoService {
 		stopWatch.stop("UserInfoService", "get attackble users");
 		return filteredUsers;
 	}
+	
+	@Override
+	public List<UserInfoModel> getHighestUsers() {
+		
+		return userInfoDao.getHighestUsers();
+	}
 }
