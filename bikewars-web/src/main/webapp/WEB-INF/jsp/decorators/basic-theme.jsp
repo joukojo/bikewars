@@ -14,11 +14,8 @@
 <title><decorator:title default="bikewars" /></title>
 <link href="${pageContext.request.contextPath}/css/bootstrap.css"
 	rel="stylesheet" media="screen">
-<link href='${pageContext.request.contextPath}/css/style.css'
-	rel="stylesheet" media="screen">
-<link
-	href='${pageContext.request.contextPath}/css/bootstrap-responsive.css'
-	rel="stylesheet">
+<link href='${pageContext.request.contextPath}/css/style.css'  rel="stylesheet" media="screen">
+<link href='${pageContext.request.contextPath}/css/bootstrap-responsive.css'  rel="stylesheet">
 
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
@@ -40,7 +37,7 @@
 								<ul class="list-unstyled" id="user-status">
 									<li>NickName <span id="nickname">&nbsp;</span></li>
 									<li>Energy: <span id="energy">&nbsp;</span>/ <span id="max-energy">&nbsp;</span></li>
-									<li>Health:<span id="health">&nbsp;</span> /<span id="max-health">&nbsp;</span></li>
+									<li>Health:<span id="health">&nbsp;</span> /<spanid="max-health">&nbsp;</span></li>
 									<li>cash:<span id="cash">&nbsp;</span></li>
 								</ul>
 							</c:when>
