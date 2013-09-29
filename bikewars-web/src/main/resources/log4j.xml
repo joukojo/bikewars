@@ -21,23 +21,31 @@
 
 	</appender>
 
-    <!-- Perf4J appenders -->
-    <!--
-       This AsyncCoalescingStatisticsAppender groups StopWatch log messages
-       into GroupedTimingStatistics messages which it sends on the
-       file appender defined below
-    -->
-    <appender name="CoalescingStatistics"
-              class="org.perf4j.log4j.AsyncCoalescingStatisticsAppender">
-        <!--
-          The TimeSlice option is used to determine the time window for which
-          all received StopWatch logs are aggregated to create a single
-          GroupedTimingStatistics log. Here we set it to 10 seconds, overriding
-          the default of 30000 ms
-        -->
-        <param name="TimeSlice" value="10000"/>
-        <appender-ref ref="fileAppender"/>
-    </appender>
+	<appender name="statisticFileAppender" class="org.apache.log4j.RollingFileAppender">
+		<param name="append" value="false" />
+		<param name="file" value="${catalina.home}/logs/bikewars-statistics.log" />
+		<param name="MaxFileSize" value="100MB" />
+		<param name="MaxBackupIndex" value="10" />
+
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{ABSOLUTE} %-5p [%c{1}] %m%n" />
+		</layout>
+
+	</appender>
+
+
+	<!-- Perf4J appenders -->
+	<!-- This AsyncCoalescingStatisticsAppender groups StopWatch log messages 
+		into GroupedTimingStatistics messages which it sends on the file appender 
+		defined below -->
+	<appender name="CoalescingStatistics"
+		class="org.perf4j.log4j.AsyncCoalescingStatisticsAppender">
+		<!-- The TimeSlice option is used to determine the time window for which 
+			all received StopWatch logs are aggregated to create a single GroupedTimingStatistics 
+			log. Here we set it to 10 seconds, overriding the default of 30000 ms -->
+		<param name="TimeSlice" value="10000" />
+		<appender-ref ref="statisticFileAppender" />
+	</appender>
 
 	<logger name="org.yogocodes">
 		<level value="info" />
@@ -51,23 +59,20 @@
 		<level value="warn" />
 	</logger>
 
-    <!--
-   The Perf4J logger. Note that org.perf4j.TimingLogger is the value of the
-   org.perf4j.StopWatch.DEFAULT_LOGGER_NAME constant. Also, note that
-   additivity is set to false, which is usually what is desired - this means
-   that timing statements will only be sent to this logger and NOT to
-   upstream loggers.
- -->
-    <logger name="org.perf4j.TimingLogger" additivity="false">
-        <level value="INFO"/>
-        <appender-ref ref="CoalescingStatistics"/>
-    </logger>
+	<!-- The Perf4J logger. Note that org.perf4j.TimingLogger is the value of 
+		the org.perf4j.StopWatch.DEFAULT_LOGGER_NAME constant. Also, note that additivity 
+		is set to false, which is usually what is desired - this means that timing 
+		statements will only be sent to this logger and NOT to upstream loggers. -->
+	<logger name="org.perf4j.TimingLogger" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="CoalescingStatistics" />
+	</logger>
 
 
 	<root>
 		<level value="info" />
-		<appender-ref ref="consoleAppender" />
-<!-- 		<appender-ref ref="fileAppender" /> -->
+<!-- 		<appender-ref ref="consoleAppender" /> -->
+		<appender-ref ref="fileAppender" />
 	</root>
 
 </log4j:configuration>
