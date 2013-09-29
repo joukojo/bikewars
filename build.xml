@@ -26,6 +26,7 @@
 		 	password=tomcat
 			server.ip=127.0.0.1
 		 	server.path=/opt/tomcat
+			staticdir=/var/www/bikewars.net
 		 	</echo>
 
 	</target>
@@ -34,8 +35,22 @@
 		<scp file="bikewars-web/target/bikewars.war" todir="${username}@${server.ip}:${server.path}/webapps" password="${password}" trust="true" />
 	</target>
 
+	<target name="deploy-static" depends="create-properties">
+		<scp todir="${username}@${server.ip}:${staticdir}/css" password="${password}" trust="true">
+
+			<fileset dir="bikewars-web/target/bikewars/css" />
+		</scp>
+		<scp todir="${username}@${server.ip}:${staticdir}/js" password="${password}" trust="true">
+
+			<fileset dir="bikewars-web/target/bikewars/js" />
+		</scp>
+		
+	</target>
+
+
 	<target name="deploy">
 		<antcall target="deploy-server" />
+		<antcall target="deploy-static" />
 		<antcall target="restart-tc" />
 	</target>
 
@@ -43,7 +58,6 @@
 		<sshexec host="${server.ip}" username="${username}" password="${password}" command="${server.path}/bin/shutdown.sh" trust="true" />
 		<sshexec host="${server.ip}" username="${username}" password="${password}" command="pkill -9 java" trust="true" />
 		<sshexec host="${server.ip}" username="${username}" password="${password}" command="${server.path}/bin/startup.sh" trust="true" />
-
 	</target>
 
 </project>
