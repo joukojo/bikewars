@@ -26,7 +26,7 @@ public class StockJdbcDaoImpl implements StockDao {
         StopWatch stopWatch = new Log4JStopWatch();
         final String sql = "select * from stocks";
         final List<StockModel> stocks = jdbcTemplate.query(sql, new StockRowMapper());
-        stopWatch.stop("stockdaoimpl", "find all stocks");
+        stopWatch.stop("stockDaoImpl", "find all stocks");
         log.trace("got all stocks");
         return stocks;
     }
